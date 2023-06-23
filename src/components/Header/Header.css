@@ -1,0 +1,14 @@
+.promo__logo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  outline: 2px solid yellow;
+  padding-bottom: 18px;
+}
+
+@media screen and (max-width: 500px) {
+  .promo__logo-container {
+    padding: 0 4px 18px;
+  }
+}
