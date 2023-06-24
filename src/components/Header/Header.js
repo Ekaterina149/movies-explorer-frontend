@@ -1,22 +1,23 @@
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 import React from "react";
+import { useLocation } from "react-router-dom";
 import promologo from "../../images/promo__logo.svg";
-function Header() {
+function Header({ isLoggedIn }) {
+  const { pathname } = useLocation();
   return (
-    <div className="promo__logo-container">
-      <img className="promo__logo" src={promologo} alt="логотип шапки" />
-      <div className="promo__link-container">
-        <Link className="promo__link-register" to="/signup">
-          {"Регистрация"}
-        </Link>
-        <button className="promo__link-button">
-          <Link className="promo__link-login" to="/signup">
-            {"Войти"}
-          </Link>
-        </button>
-      </div>
-    </div>
+    <header
+      className={`header-container ${
+        pathname === "/" && "header-container_theme_main"
+      }`}
+    >
+      <img
+        className="header-container__logo"
+        src={promologo}
+        alt="логотип шапки"
+      />
+      <Navigation isLoggedIn={isLoggedIn} />
+    </header>
   );
 }
 export default Header;

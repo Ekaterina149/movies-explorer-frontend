@@ -1,14 +1,23 @@
-.promo__logo-container {
+.header-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  outline: 2px solid yellow;
-  padding-bottom: 18px;
+  padding: 18px 70px 18px;
+}
+
+.header-container_theme_main {
+  background-color: #073042;
+}
+
+@media screen and (max-width: 900px) {
+  .header-container {
+    padding: 18px 30px 18px;
+  }
 }
 
 @media screen and (max-width: 500px) {
-  .promo__logo-container {
-    padding: 0 4px 18px;
+  .header-container {
+    padding: 18px 14px 18px;
   }
 }

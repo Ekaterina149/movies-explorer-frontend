@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Main from "../Main/Main";
@@ -10,10 +11,11 @@ import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   return (
     <div className="page">
       <Routes>
-        <Route exact path="/" element={<Main />} />
+        <Route exact path="/" element={<Main isLoggedIn={isLoggedIn} />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/saved-movies" element={<Profile />} />

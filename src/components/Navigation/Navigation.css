@@ -1,0 +1,60 @@
+.navigation-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+}
+
+.navigation-register {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  outline: 2px solid red;
+}
+
+.navigation-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 8px 20px;
+  background-color: #3ddc84;
+  border-radius: 3px;
+  width: 76px;
+  height: 32px;
+}
+
+.navigation-login {
+  font-family: "Inter";
+  font-style: normal;
+  text-align: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: white;
+  outline: 2px solid yellow;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 500px) {
+  .navigation-container {
+    gap: 14px;
+  }
+  .navigation-register {
+    font-size: 10px;
+  }
+
+  .navigation-button {
+    width: 54px;
+    height: 26px;
+  }
+  .navigation-login {
+    font-size: 10px;
+  }
+}

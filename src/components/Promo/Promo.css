@@ -1,12 +1,14 @@
 .promo {
   background-color: #073042;
+  /* background-color: #60b973; */
+
   text-align: center;
   /* font-size: xx-large; */
   font-family: Inter;
   font-weight: 500;
   outline: 2px solid red;
   max-width: 1280px;
-  padding: 18px 70px 75px;
+  padding: 0px 70px 75px;
 }
 .promo__text-container {
   display: flex;
@@ -48,34 +50,6 @@
   padding-top: 36px;
   padding-bottom: 146px;
 }
-.promo__logo-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  outline: 2px solid yellow;
-  padding-bottom: 18px;
-}
-.promo__link-register {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  color: #ffffff;
-  text-decoration: none;
-  text-align: center;
-  outline: 2px solid red;
-}
-
-.promo__link-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  outline: 2px solid yellow;
-  gap: 30px;
-}
 
 .promo__button {
   font-family: "Inter";
@@ -98,17 +72,7 @@
   justify-items: flex-start;
   align-items: flex-start;
 }
-.promo__link-login {
-  font-family: "Inter";
-  font-style: normal;
-  text-align: center;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  color: white;
-  outline: 2px solid yellow;
-  text-decoration: none;
-}
+
 .promo__link-button {
   display: flex;
   justify-content: center;
@@ -133,7 +97,7 @@
 
 @media screen and (max-width: 900px) {
   .promo {
-    padding: 18px 30px 76px;
+    padding: 0px 30px 76px;
   }
   .promo__text-container {
     flex-direction: column-reverse;
@@ -164,11 +128,9 @@
 }
 @media screen and (max-width: 500px) {
   .promo {
-    padding: 18px 10px 30px;
+    padding: 0px 10px 30px;
   }
-  .promo__logo-container {
-    padding: 0 4px 18px;
-  }
+
   .promo__text-container {
     gap: 44px;
     padding-top: 70px;
@@ -189,19 +151,5 @@
     height: 206px;
     object-fit: cover;
     outline: 2px solid red;
-  }
-
-  .promo__link-container {
-    gap: 14px;
-  }
-  .promo__link-register {
-    font-size: 10px;
-  }
-  .promo__link-login {
-    font-size: 10px;
-  }
-  .promo__link-button {
-    width: 54px;
-    height: 26px;
   }
 }

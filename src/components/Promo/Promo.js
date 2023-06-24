@@ -1,26 +1,11 @@
 import React from "react";
 import "./Promo.css";
 import Header from "../Header/Header";
-import { Link } from "react-router-dom";
 import promoImg from "../../images/promo__image.svg";
-import promologo from "../../images/promo__logo.svg";
-function Promo() {
+function Promo({ isLoggedIn }) {
   return (
-    <header className="promo">
-      {/* <div className="promo__logo-container">
-        <img className="promo__logo" src={promologo} alt="логотип шапки" />
-        <div className="promo__link-container">
-          <Link className="promo__link-register" to="/signup">
-            {"Регистрация"}
-          </Link>
-          <button className="promo__link-button">
-            <Link className="promo__link-login" to="/signup">
-              {"Войти"}
-            </Link>
-          </button>
-        </div>
-      </div> */}
-      <Header />
+    <section className="promo">
+      {/* <Header isLoggedIn={isLoggedIn} /> */}
       <div className="promo__text-container">
         <div className="promo__text">
           <h1 className="promo__title">
@@ -42,7 +27,7 @@ function Promo() {
           alt="Картинка в заголовке"
         />
       </div>
-    </header>
+    </section>
   );
 }
 export default Promo;
