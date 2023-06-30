@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navigation.css";
-import NavTar from "../NavTab/NavTab";
+import NavTab from "../NavTab/NavTab";
 function Navigation({ isLoggedIn }) {
   return (
     <nav className="navigation-container">
       {isLoggedIn ? (
-        <NavTar />
+        <NavTab />
       ) : (
         <>
           {" "}
@@ -14,7 +14,7 @@ function Navigation({ isLoggedIn }) {
             {"Регистрация"}
           </Link>
           <button className="navigation-button">
-            <Link className="navigation-login" to="/signup">
+            <Link className="navigation-login" to="/signin">
               {"Войти"}
             </Link>
           </button>{" "}

@@ -53,7 +53,9 @@ function NavTab() {
             <NavLink
               className={`navbar__menu-account-link ${
                 pathname === "/" && "navbar__menu-account-link_type_light"
-              } ${pathname === "/profile" && "navbar__menu-link_active"}`}
+              } ${
+                pathname === "/profile" && "navbar__menu-account-link_active"
+              }`}
               activeclassname="navbar__menu-account-link_active"
               onClick={handleMenuClosing}
               to="/profile"
@@ -112,7 +114,9 @@ function NavTab() {
             </ul>
             <div className="navbar__menu-account">
               <NavLink
-                className="navbar__menu-account-link"
+                className={`navbar__menu-account-link ${
+                  pathname === "/profile" && "navbar__menu-account-link_active"
+                }`}
                 activeclassname="navbar__menu-account-link_active"
                 onClick={handleMenuClosing}
                 to="/profile"

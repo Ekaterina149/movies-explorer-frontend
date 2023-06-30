@@ -1,0 +1,151 @@
+.form-elements {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+.form-container {
+  width: 396px;
+  background-color: transparent;
+  box-sizing: border-box;
+  padding: 70px 0px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.form-container__form {
+  display: flex;
+  flex-direction: column;
+  min-height: 413px;
+  justify-content: space-between;
+}
+.form-container__logo {
+  width: 38px;
+  height: 38px;
+}
+.form-container__header {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin: 0;
+}
+
+.form-container__fieldset {
+  margin: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 0 0px;
+}
+.form-container__submit {
+  width: 396px;
+  height: 45px;
+  border-radius: 3px;
+  background: #4285f4;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+.form-container__submit_type_disabled {
+  background-color: transparent;
+  outline: 2px solid #fff;
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.2;
+}
+.form-container__submit:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+.form-container__text {
+  padding-top: 16px;
+  color: #8b8b8b;
+  text-align: center;
+  font-size: 14px;
+  margin: 0;
+}
+.form-container__link {
+  color: #4285f4;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+  padding-left: 6px;
+}
+.form-container__link:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+.form-item {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  position: relative;
+  padding-bottom: 10px;
+}
+.form-item__text {
+  margin: 0;
+  padding: 0 0 10px;
+  color: #8b8b8b;
+  font-size: 10px;
+}
+
+.form__input {
+  padding: 15px;
+  background-color: #2f2f2f;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-family: Inter;
+}
+.form__input_type_invalid {
+  color: #ee3465;
+}
+.form__input-error {
+  color: #ee3465;
+  font-size: 10px;
+  font-family: Inter;
+  position: absolute;
+  bottom: -10px;
+}
+
+@media screen and (max-width: 900px) {
+  .form-container {
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .form-container {
+    width: 260px;
+    justify-content: flex-start;
+    padding-top: 56px;
+    align-items: center;
+  }
+  .form-container__submit {
+    width: 260px;
+  }
+  .form-container__header {
+    padding-bottom: 80px;
+    padding-top: 50px;
+  }
+  .form-container__form {
+    min-height: 505px;
+  }
+  .form-container__text {
+    font-size: 12px;
+  }
+  .form-container__link {
+    font-size: 12px;
+  }
+}

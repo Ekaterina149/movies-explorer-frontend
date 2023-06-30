@@ -66,6 +66,10 @@
   padding: 10px 20px;
   box-sizing: border-box;
 }
+.promo__button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
 .promo__text {
   display: flex;
   flex-direction: column;

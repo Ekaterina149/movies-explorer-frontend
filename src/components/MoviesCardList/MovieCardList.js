@@ -1,5 +1,12 @@
 import React from "react";
+import { useState } from "react";
+import list from "../../utils/constants.js"
 function MovieCardList() {
-  return <section></section>;
+ const [movieList, setMovieList] = useState(list);
+  return (
+  <section className = "moovie-container">
+
+
+  </section>)
 }
 export default MovieCardList;

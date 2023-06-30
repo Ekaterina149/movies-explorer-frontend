@@ -41,7 +41,14 @@
   outline: 2px solid yellow;
   text-decoration: none;
 }
-
+.navigation-login:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+.navigation-register:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
 @media screen and (max-width: 500px) {
   .navigation-container {
     gap: 14px;
