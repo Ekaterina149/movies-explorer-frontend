@@ -7,8 +7,9 @@ import pic_booksellers from "../images/Booksellers.png";
 import pic_germany from "../images/Thoughts_about_Germany.png";
 import pic_gimme from "../images/Gimme_danger.png";
 import pic_janice from "../images/Janice_little_girl.png";
-import pic_pj from "../images/PJ_Hurvy.png"
-import pic_cinema from "../images/cinema_sound_art.png"
+import pic_jump from "../images/brace_before_jump.png";
+import pic_pj from "../images/PJ_Hurvy.png";
+import pic_cinema from "../images/cinema_sound_art.png";
 
 const techs = ["HTML", "CSS", "JS", "React", "Git", "Express.js", "MobgoDB"];
 const portfolioLinks = [
@@ -54,7 +55,7 @@ const movieList = [
   {
     name: "Соберись перед прыжком",
     duration: "1ч 42м",
-    image: pic_janice,
+    image: pic_jump,
   },
   {
     name: "Пи Джей Харви: A dog called money",
@@ -67,4 +68,14 @@ const movieList = [
     image: pic_cinema,
   },
 ];
-export { techs, portfolioLinks, movieList };
+
+const savedlist = [
+  { name: "33 слова о дизайне", duration: "1ч 47м", image: pic_33_word },
+  {
+    name: "Киноальманах «100 лет дизайна»",
+    duration: "1ч 3м",
+    image: pic_100_years,
+  },
+  { name: "В погоне за Бенкси", duration: "1ч 42м", image: pic_Banksy },
+];
+export { techs, portfolioLinks, movieList, savedlist };

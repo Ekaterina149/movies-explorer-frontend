@@ -1,0 +1,110 @@
+.moviecard {
+  width: 100%;
+  max-height: 281px;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  background: #222;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+}
+
+.moviecard__image {
+  /* width: 364px;
+  height: 203px;
+  object-fit: cover; */
+  min-height: 203px;
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.moviecard-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 16px 2px;
+  flex-shrink: 1;
+}
+
+.moviecard-box__title {
+  color: #fff;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.moviecard-box__like-button {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  background: center / 30px no-repeat url(../../images/like_button.svg);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.moviecard-box__like-button_type_delete {
+  background-image: none;
+}
+
+.moviecard-box__like-button_type_delete:hover {
+  background-image: url(../../images/like_button_delete.svg);
+  background-repeat: no-repeat;
+  background-size: 30px;
+  background-position: center;
+  cursor: pointer;
+}
+.moviecard-box__like-button_type_active {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  background: center / 30px no-repeat url(../../images/like_button_active.svg);
+}
+
+.moviecard__duration {
+  color: #8b8b8b;
+  font-size: 11px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 0 16px 16px;
+  margin: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .moviecard__image {
+    min-height: 190px;
+  }
+  .moviecard {
+    width: 100%;
+    max-height: 262px;
+  }
+  .moviecard-box {
+    padding: 14px 0 0 14px;
+  }
+  .moviecard__duration {
+    padding: 0 14px 14px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .moviecard__image {
+    min-height: 168px;
+  }
+  .moviecard {
+    width: 100%;
+    max-height: 237px;
+    max-width: 300px;
+  }
+  .moviecard-box__title {
+    font-size: 12px;
+  }
+}

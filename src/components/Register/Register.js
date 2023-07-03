@@ -22,7 +22,6 @@ function Register({ onRegister }) {
       route={"/signin"}
       linkBottomPage={"Войти"}
       textBottomPage={"Уже зарегистрированы?"}
-      // className="content"
       isValid={isValid}
     >
       <>

@@ -9,6 +9,7 @@ export function useFormAndValidation() {
     name: "Введите корректное имя, нельзя вводить только пробелы",
     email: "Введите корректный email",
     password: "Введите корректный пароль, нельзя вводить только пробелы",
+    movie: "Введите корректное название фильма, нельзя вводить только пробелы",
   };
 
   const handleChange = (e) => {
@@ -28,7 +29,6 @@ export function useFormAndValidation() {
       (e.target.value.match(/\s/g) !== null &&
         e.target.value.match(/\s/g).length === e.target.value.length)
     ) {
-      // debugger;
       e.target.setCustomValidity(message[name]);
     } else {
       e.target.setCustomValidity("");

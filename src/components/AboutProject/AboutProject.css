@@ -25,17 +25,17 @@
   padding-top: 70px;
   padding-bottom: 110px;
 }
-.item1 {
+.about-project__grid-container-shortlist-subtitle_place_first {
   grid-area: header1;
 }
-.item3 {
+.about-project__grid-container-shortlist-subtitle_place_third {
   grid-area: header2;
 }
 
-.item2 {
+.about-project__grid-container-shortlist-text_place_second {
   grid-area: content1;
 }
-.item4 {
+.about-project__grid-container-shortlist-subtitle_place_forth {
   grid-area: content2;
 }
 .about-project__grid-container-shortlist-subtitle {

@@ -1,9 +1,13 @@
 import "./Movies.css";
 import React from "react";
-function Movies() {
+import { movieList } from "../../utils/constants.js";
+import MovieCardList from "../MoviesCardList/MovieCardList";
+import SearchForm from "../SearchForm/SearchForm";
+function Movies({ onLikeClick }) {
   return (
-    <section className="content">
-      <h1 className="header_Movie">{"Hello, moovie!"}</h1>
+    <section className="movie-content">
+      <SearchForm />
+      <MovieCardList onLike={onLikeClick} movieList={movieList} />
     </section>
   );
 }

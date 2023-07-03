@@ -5,7 +5,7 @@
   font-weight: 500;
 }
 
-.content {
+.movie-content {
   /* контент, если надо, расти */
   flex: 1;
   display: flex;

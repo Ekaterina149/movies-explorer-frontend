@@ -11,13 +11,28 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import Mistake from "../Mistake/Mistake";
+import { savedlist } from "../../utils/constants";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [savedMovies, setSavedMovies] = useState(savedlist);
   const { pathname } = useLocation();
   function handleRegister(data) {}
   function handleLogin(data) {}
   function handleEditProfile(data) {}
+  function handleSaveMovie(movie) {
+    debugger;
+    setSavedMovies([movie, ...savedMovies]);
+  }
+  console.log("a", savedMovies);
+  function handleDeleteMovie(movie) {
+    const newMoviesList = savedMovies.filter((m) =>
+      m.key === movie.key ? false : true
+    );
+    setSavedMovies(newMoviesList);
+  }
+
+  // console.log(selList);
   return (
     <div className="page">
       {pathname === "/movies" ||
@@ -31,8 +46,14 @@ function App() {
 
       <Routes>
         <Route exact path="/" element={<Main isLoggedIn={isLoggedIn} />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/saved-movies" element={<SavedMovies />} />
+        <Route
+          path="/movies"
+          element={<Movies onLikeClick={handleSaveMovie} />}
+        />
+        <Route
+          path="/saved-movies"
+          element={<SavedMovies list={savedMovies} />}
+        />
         <Route
           path="/profile"
           element={

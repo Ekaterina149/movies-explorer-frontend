@@ -6,7 +6,6 @@
   /* font-size: xx-large; */
   font-family: Inter;
   font-weight: 500;
-  outline: 2px solid red;
   max-width: 1280px;
   padding: 0px 70px 75px;
 }
@@ -19,7 +18,6 @@
 
 .promo__title {
   color: white;
-  outline: 2px solid red;
   margin: 0;
   font-family: "Inter";
   font-style: normal;
@@ -34,7 +32,6 @@
   width: 310px;
   height: 304px;
   object-fit: cover;
-  outline: 2px solid red;
 }
 
 .promo__subtitle {
@@ -42,7 +39,6 @@
   font-size: 13px;
   line-height: 16px;
   text-align: left;
-  outline: 2px solid red;
   margin: 0;
   opacity: 0.5;
   mix-blend-mode: normal;
@@ -90,7 +86,6 @@
 }
 @media screen and (max-width: 1030px) {
   .promo__title {
-    outline: 2px solid red;
     margin: 0;
     font-style: normal;
     font-size: 40px;
@@ -115,14 +110,12 @@
   }
 
   .promo__title {
-    outline: 2px solid red;
     font-style: normal;
     text-align: center;
     max-width: 680px;
   }
   .promo__subtitle {
     text-align: center;
-    outline: 2px solid red;
     margin: 0;
     opacity: 0.5;
     max-width: 260px;
@@ -154,6 +147,5 @@
     width: 210px;
     height: 206px;
     object-fit: cover;
-    outline: 2px solid red;
   }
 }

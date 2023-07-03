@@ -14,7 +14,13 @@ function Form({
   return (
     <div className="form form-elements">
       <div className="form-container">
-        <img className="form-container__logo" src={promologo} alt="логотип" />
+        <Link to="/" className="form-container__logo-link">
+          <img
+            className="form-container__logo"
+            src={promologo}
+            alt="ссылка на главную"
+          />
+        </Link>
         <h2 className="form-container__header">{title}</h2>
         <form
           className="form-container__form"

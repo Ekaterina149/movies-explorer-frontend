@@ -7,18 +7,18 @@ function AboutProject() {
       {/* <h2 className="main__title">{"О проекте"}</h2> */}
       <Title name="О проекте" />
       <div className="about-project__grid-container-shortlist">
-        <p className="about-project__grid-container-shortlist-subtitle item1">
+        <p className="about-project__grid-container-shortlist-subtitle about-project__grid-container-shortlist-subtitle_place_first">
           {"Дипломный проект включал 5 этапов"}
         </p>
-        <p className="about-project__grid-container-shortlist-text item2">
+        <p className="about-project__grid-container-shortlist-text about-project__grid-container-shortlist-text_place_second">
           {
             "Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки."
           }
         </p>
-        <p className="about-project__grid-container-shortlist-subtitle item3">
+        <p className="about-project__grid-container-shortlist-subtitle about-project__grid-container-shortlist-subtitle_place_third">
           {"На выполнение диплома ушло 5 недель"}
         </p>
-        <p className="about-project__grid-container-shortlist-text item4">
+        <p className="about-project__grid-container-shortlist-text about-project__grid-container-shortlist-subtitle_place_forth">
           {
             "У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься."
           }
