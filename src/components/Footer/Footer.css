@@ -39,6 +39,10 @@
   margin: 0;
   text-decoration: none;
   text-align: center;
+  transition: opacity easy-in-out 0.3s;
+}
+.footer-container__link:hover {
+  opacity: 0.6;
 }
 
 .footer-container-links {
