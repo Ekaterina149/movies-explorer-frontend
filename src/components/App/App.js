@@ -25,12 +25,6 @@ function App() {
     setSavedMovies([movie, ...savedMovies]);
   }
   console.log("a", savedMovies);
-  function handleDeleteMovie(movie) {
-    const newMoviesList = savedMovies.filter((m) =>
-      m.key === movie.key ? false : true
-    );
-    setSavedMovies(newMoviesList);
-  }
 
   // console.log(selList);
   return (
