@@ -14,7 +14,7 @@ import Mistake from "../Mistake/Mistake";
 import { savedlist } from "../../utils/constants";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [savedMovies, setSavedMovies] = useState(savedlist);
   const { pathname } = useLocation();
   function handleRegister(data) {}

@@ -9,7 +9,13 @@
 .header-container_theme_main {
   background-color: #073042;
 }
+.header-container__logo-link {
+  transition: opacity easy-in-out 0.3s;
+}
 
+.header-container__logo-link:hover {
+  opacity: 0.6;
+}
 @media screen and (max-width: 900px) {
   .header-container {
     padding: 18px 30px 18px;

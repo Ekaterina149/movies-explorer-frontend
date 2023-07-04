@@ -15,33 +15,31 @@ function NavTab() {
 
   return (
     <>
-      <div className="navbar">
-        <div className="navbar__hamburger-overlay" onClick={handleMenuOpening}>
-          <div className={"navbar__hamburger"} />
+      <div className="navtab">
+        <div className="navtab__hamburger-overlay" onClick={handleMenuOpening}>
+          <div className={"navtab__hamburger"} />
         </div>
 
-        <section className="navbar__menu">
-          <ul className="navbar__menu-list">
-            <li className="navbar__menu-list-item">
+        <section className="navtab__menu">
+          <ul className="navtab__menu-list">
+            <li className="navtab__menu-list-item">
               <NavLink
-                className={`navbar__menu-link ${
-                  pathname === "/" && "navbar__menu-link_type_light"
-                } ${pathname === "/movies" && "navbar__menu-link_active"}`}
-                activeclassname="navbar__menu-link_active"
+                className={`navtab__menu-link  ${
+                  pathname === "/movies" && "navtab__menu-link_active"
+                }`}
+                activeclassname="navtab__menu-link_active"
                 onClick={handleMenuClosing}
                 to="/movies"
               >
                 Фильмы
               </NavLink>
             </li>
-            <li className="navbar__menu-list-item">
+            <li className="navtab__menu-list-item">
               <NavLink
-                className={`navbar__menu-link ${
-                  pathname === "/" && "navbar__menu-link_type_light"
-                } ${
-                  pathname === "/saved-movies" && "navbar__menu-link_active"
+                className={`navtab__menu-link  ${
+                  pathname === "/saved-movies" && "navtab__menu-link_active"
                 }`}
-                activeclassname="navbar__menu-link_active"
+                activeclassname="navtab__menu-link_active"
                 onClick={handleMenuClosing}
                 to="/saved-movies"
               >
@@ -49,14 +47,12 @@ function NavTab() {
               </NavLink>
             </li>
           </ul>
-          <div className="navbar__menu-account">
+          <div className="navtab__menu-account">
             <NavLink
-              className={`navbar__menu-account-link ${
-                pathname === "/" && "navbar__menu-account-link_type_light"
-              } ${
-                pathname === "/profile" && "navbar__menu-account-link_active"
+              className={`navtab__menu-account-link  ${
+                pathname === "/profile" && "navtab__menu-account-link_active"
               }`}
-              activeclassname="navbar__menu-account-link_active"
+              activeclassname="navtab__menu-account-link_active"
               onClick={handleMenuClosing}
               to="/profile"
             >
@@ -74,37 +70,37 @@ function NavTab() {
               type="button"
               onClick={handleMenuClosing}
             ></button>
-            <ul className="navbar__menu-list">
-              <li className="navbar__menu-list-item">
+            <ul className="navtab__menu-list">
+              <li className="navtab__menu-list-item">
                 <NavLink
-                  className={`navbar__menu-link ${
-                    pathname === "/" && "navbar__menu-link_active"
+                  className={`navtab__menu-link ${
+                    pathname === "/" && "navtab__menu-link_active"
                   }`}
-                  activeclassname="navbar__menu-link_active"
+                  activeclassname="navtab__menu-link_active"
                   onClick={handleMenuClosing}
                   to="/"
                 >
                   Главная
                 </NavLink>
               </li>
-              <li className="navbar__menu-list-item">
+              <li className="navtab__menu-list-item">
                 <NavLink
-                  className={`navbar__menu-link ${
-                    pathname === "/movies" && "navbar__menu-link_active"
+                  className={`navtab__menu-link ${
+                    pathname === "/movies" && "navtab__menu-link_active"
                   }`}
-                  activeclassname="navbar__menu-link_active"
+                  activeclassname="navtab__menu-link_active"
                   onClick={handleMenuClosing}
                   to="/movies"
                 >
                   Фильмы
                 </NavLink>
               </li>
-              <li className="navbar__menu-list-item">
+              <li className="navtab__menu-list-item">
                 <NavLink
-                  className={`navbar__menu-link ${
-                    pathname === "/saved-movies" && "navbar__menu-link_active"
+                  className={`navtab__menu-link ${
+                    pathname === "/saved-movies" && "navtab__menu-link_active"
                   }`}
-                  activeclassname="navbar__menu-link_active"
+                  activeclassname="navtab__menu-link_active"
                   onClick={handleMenuClosing}
                   to="/saved-movies"
                 >
@@ -112,12 +108,12 @@ function NavTab() {
                 </NavLink>
               </li>
             </ul>
-            <div className="navbar__menu-account">
+            <div className="navtab__menu-account">
               <NavLink
-                className={`navbar__menu-account-link ${
-                  pathname === "/profile" && "navbar__menu-account-link_active"
+                className={`navtab__menu-account-link ${
+                  pathname === "/profile" && "navtab__menu-account-link_active"
                 }`}
-                activeclassname="navbar__menu-account-link_active"
+                activeclassname="navtab__menu-account-link_active"
                 onClick={handleMenuClosing}
                 to="/profile"
               >

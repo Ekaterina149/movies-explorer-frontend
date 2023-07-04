@@ -1,15 +1,13 @@
 import React from "react";
 import "./Promo.css";
-import Header from "../Header/Header";
 import promoImg from "../../images/promo__image.svg";
-function Promo({ isLoggedIn }) {
+function Promo() {
   return (
     <section className="promo">
-      {/* <Header isLoggedIn={isLoggedIn} /> */}
       <div className="promo__text-container">
         <div className="promo__text">
           <h1 className="promo__title">
-            {"Учебный проект студента факультета Веб-разработки."}
+            Учебный проект студента факультета Веб&#8209;разработки.
           </h1>
           <p className="promo__subtitle">
             {

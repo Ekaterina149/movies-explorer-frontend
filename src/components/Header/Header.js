@@ -8,7 +8,7 @@ function Header({ isLoggedIn }) {
   return (
     <header
       className={`header-container ${
-        pathname === "/" && "header-container_theme_main"
+        pathname === "/" ? "header-container_theme_main" : ""
       }`}
     >
       <Link className="header-container__logo-link" to="/">

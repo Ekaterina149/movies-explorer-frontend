@@ -15,7 +15,7 @@
   color: #ffffff;
   text-decoration: none;
   text-align: center;
-  outline: 2px solid red;
+  transition: opacity easy-in-out 0.3s;
 }
 
 .navigation-button {
@@ -28,6 +28,7 @@
   border-radius: 3px;
   width: 76px;
   height: 32px;
+  transition: opacity easy-in-out 0.3s;
 }
 
 .navigation-login {
@@ -38,8 +39,8 @@
   font-size: 12px;
   line-height: 16px;
   color: white;
-  outline: 2px solid yellow;
   text-decoration: none;
+  transition: opacity easy-in-out 0.3s;
 }
 .navigation-login:hover {
   opacity: 0.6;

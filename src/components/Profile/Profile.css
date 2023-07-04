@@ -81,7 +81,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 19vh;
+  margin-top: 26vh;
 }
 .profile-container__link {
   text-align: center;
@@ -155,7 +155,7 @@
     margin-top: 18vh;
   }
   .profile-container__link-buttons {
-    margin-top: 18vh;
+    margin-top: 0;
   }
 }
 
@@ -172,7 +172,7 @@
   }
 
   .profile-container__link-buttons {
-    margin-top: 35vh;
+    margin-top: 26vh;
   }
   .profile-container__submit {
     margin-top: 35vh;
