@@ -11,7 +11,7 @@ import pic_jump from "../images/brace_before_jump.png";
 import pic_pj from "../images/PJ_Hurvy.png";
 import pic_cinema from "../images/cinema_sound_art.png";
 
-const techs = ["HTML", "CSS", "JS", "React", "Git", "Express.js", "MobgoDB"];
+const techs = ["HTML", "CSS", "JS", "React", "Git", "Express.js", "MongoDB"];
 const portfolioLinks = [
   {
     name: "Статичный сайт",
