@@ -95,16 +95,28 @@
   }
 }
 
-@media screen and (max-width: 500px) {
-  .moviecard__image {
-    min-height: 168px;
-  }
+@media screen and (max-width: 620px) {
+
   .moviecard {
     width: 100%;
-    max-height: 237px;
     max-width: 300px;
   }
   .moviecard-box__title {
     font-size: 12px;
   }
+  .moviecard__image {
+    min-height: 190px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .moviecard__image {
+    min-height: 168px;
+  }
+  .moviecard {
+
+    max-height: 237px;
+
+  }
+
 }

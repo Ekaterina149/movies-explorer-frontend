@@ -26,8 +26,9 @@
   font-weight: 500;
   line-height: normal;
   margin-top: 60px;
+  border: none;
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 940px) {
   .moovie-container {
     grid-template-columns: repeat(2, 1fr);
     row-gap: 30px;
@@ -35,15 +36,22 @@
   }
 
   .moovie {
-    padding: 80px 30px 80px;
+    padding: 80px 80px 80px;
   }
 
   .moovie__button {
     margin-top: 80px;
   }
 }
+@media screen and (max-width: 768px) {
+.moovie {
+  padding: 80px 30px 80px;
+}
+}
 
-@media screen and (max-width: 500px) {
+
+
+@media screen and (max-width: 620px) {
   .moovie-container {
     grid-template-columns: 1fr;
     row-gap: 14px;
