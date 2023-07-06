@@ -13,6 +13,8 @@ import Footer from "../Footer/Footer";
 import Mistake from "../Mistake/Mistake";
 import { savedlist } from "../../utils/constants";
 
+
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [savedMovies, setSavedMovies] = useState(savedlist);
@@ -37,7 +39,7 @@ function App() {
       ) : (
         ""
       )}
-
+      {/* <HashRouter > */}
       <Routes>
         <Route exact path="/" element={<Main isLoggedIn={isLoggedIn} />} />
         <Route
@@ -66,6 +68,9 @@ function App() {
         <Route path="/signin" element={<Login onLogin={handleLogin} />} />
         <Route path="*" element={<Mistake />} />
       </Routes>
+
+      {/* </HashRouter> */}
+
       {pathname === "/movies" ||
       pathname === "/" ||
       pathname === "/saved-movies" ? (

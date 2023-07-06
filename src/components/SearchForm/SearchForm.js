@@ -22,7 +22,7 @@ function SearchForm({ onSearchFilm }) {
       onSubmit={handleSubmit}
       noValidate
     >
-      <label className="search-form-box">
+      <div className="search-form-box">
         <input
           className="search-form__input"
           type="text"
@@ -42,7 +42,7 @@ function SearchForm({ onSearchFilm }) {
           aria-label="Найти"
           disabled={!isValid}
         />
-      </label>
+      </div>
 
       <FilterCheckbox />
     </form>

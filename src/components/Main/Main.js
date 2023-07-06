@@ -10,7 +10,7 @@ import Portfolio from "../Portfolio/Portfolio";
 import { techs, portfolioLinks } from "../../utils/constants.js";
 function Main({ isLoggedIn }) {
   return (
-    <section className="content-main">
+    <main className="content-main">
       <Promo />
       <AboutProject />
       <Techs techs={techs} />
@@ -43,7 +43,7 @@ function Main({ isLoggedIn }) {
           </div>
         </div>
       </section> */}
-    </section>
+    </main>
   );
 }
 

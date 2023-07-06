@@ -152,7 +152,7 @@
     margin-top: 84px;
   }
   .profile-container__edit-button {
-    margin-top: 18vh;
+    margin-top: 17vh;
   }
   .profile-container__link-buttons {
     margin-top: 0;
@@ -165,7 +165,7 @@
   }
   .profile-container__form {
     width: 260px;
-    margin-top: 68px;
+    margin-top: 65px;
   }
   .profile-container__submit {
     width: 260px;
@@ -173,6 +173,7 @@
 
   .profile-container__link-buttons {
     margin-top: 26vh;
+    margin-bottom: 40px;
   }
   .profile-container__submit {
     margin-top: 35vh;

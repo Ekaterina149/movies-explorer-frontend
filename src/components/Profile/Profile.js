@@ -45,7 +45,7 @@ function Profile({ buttonText, route, linkBottomPage, onUpdate }) {
   }
 
   return (
-    <section className="profile">
+    <main className="profile">
       <div className="profile-container">
         <h2 className="profile-container__header">{`Привет, ${userData.name}!`}</h2>
         <form
@@ -138,7 +138,7 @@ function Profile({ buttonText, route, linkBottomPage, onUpdate }) {
           </div>
         </form>
       </div>
-    </section>
+    </main>
   );
 }
 export default Profile;

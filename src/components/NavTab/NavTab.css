@@ -1,6 +1,6 @@
 .navtab {
   display: flex;
-  margin-right: 36px;
+  /* margin-right: 36px; */
   width: 100%;
 }
 .drop-down-menu__container {
@@ -22,7 +22,7 @@
 
 .navtab__menu {
   display: flex;
-  gap: 375px;
+  gap: 28vw;
 }
 
 .navtab__menu-link {
@@ -92,8 +92,8 @@
     margin: 0;
     padding: 0;
     border: none;
-    width: 44px;
-    height: 44px;
+    /* width: 44px;
+    height: 44px; */
     background-color: transparent;
     position: relative;
     /* outline: 2px solid red; */

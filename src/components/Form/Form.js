@@ -12,8 +12,8 @@ function Form({
   isValid,
 }) {
   return (
-    <div className="form form-elements">
-      <div className="form-container">
+    <main className="form form-elements">
+      <section className="form-container">
         <Link to="/" className="form-container__logo-link">
           <img
             className="form-container__logo"
@@ -48,8 +48,8 @@ function Form({
             </p>
           </div>
         </form>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 export default Form;
