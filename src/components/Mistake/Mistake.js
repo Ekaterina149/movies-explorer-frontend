@@ -1,7 +1,6 @@
 import "./Mistake.css";
 import React from "react";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Mistake() {
   const navigate = useNavigate();
