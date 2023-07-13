@@ -1,9 +1,17 @@
 import React from "react";
 import Form from "../Form/Form";
+import { useEffect } from "react";
 import { useFormAndValidation } from "../../hook/useFormAndValidation";
-function Login({ onLogin }) {
+function Login({ onLogin, errorMessage, onErrorMessage }) {
+  console.log("errorMassageLogin", errorMessage);
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
+  // сбросим ошибку сервера
+  useEffect(() => {
+    if (errorMessage) {
+      onErrorMessage("");
+    }
+  }, [values.email, values.password]);
 
   function handleSubmit(evt) {
     const { name, email, password } = values;
@@ -24,6 +32,7 @@ function Login({ onLogin }) {
       textBottomPage={"Ещё не зарегистрированы?"}
       className="content"
       isValid={isValid}
+      errorMessage={errorMessage}
     >
       <>
         <label className="form-item">
@@ -59,7 +68,6 @@ function Login({ onLogin }) {
             value={values.password || ""}
             minLength="3"
             maxLength="30"
-            // pattern="^[a-zA-Z0-9]+$"
             required
             onChange={handleChange}
           />

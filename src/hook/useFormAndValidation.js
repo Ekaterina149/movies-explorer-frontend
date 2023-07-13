@@ -16,22 +16,22 @@ export function useFormAndValidation() {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
 
-    // if (e.target.validity.patternMismatch) {
-    //   e.target.setCustomValidity(message[name]);
-    //   console.log(e.target.validationMessage);
-    //   debugger;
-    // } else {
-    //   e.target.setCustomValidity("");
-    // }
-
     if (
-      e.target.value === "" ||
-      (e.target.value.match(/\s/g) !== null &&
-        e.target.value.match(/\s/g).length === e.target.value.length)
+      // e.target.value === "" ||
+      e.target.value.match(/\s/g) !== null &&
+      e.target.value.match(/\s/g).length === e.target.value.length
     ) {
       e.target.setCustomValidity(message[name]);
     } else {
-      e.target.setCustomValidity("");
+      if (e.target.validity.patternMismatch) {
+        e.target.setCustomValidity("Введите имя, нельзя вводить !№?&");
+        console.log(e.target.validationMessage);
+        // debugger;
+      } else {
+        e.target.setCustomValidity("");
+      }
+
+      // e.target.setCustomValidity("");
     }
 
     if (name === "email") {

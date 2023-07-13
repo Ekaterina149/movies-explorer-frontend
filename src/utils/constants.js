@@ -12,6 +12,7 @@ import pic_pj from "../images/PJ_Hurvy.png";
 import pic_cinema from "../images/cinema_sound_art.png";
 
 const techs = ["HTML", "CSS", "JS", "React", "Git", "Express.js", "MongoDB"];
+
 const portfolioLinks = [
   {
     name: "Статичный сайт",
@@ -78,4 +79,28 @@ const savedlist = [
   },
   { name: "В погоне за Бенкси", duration: "1ч 42м", image: pic_Banksy },
 ];
-export { techs, portfolioLinks, movieList, savedlist };
+const MOVIE_BASEURL = "https://api.nomoreparties.co/beatfilm-movies";
+const BASEURL = "http://localhost:3000";
+const getMovieHeaders = {
+  "Content-Type": "application/json",
+};
+const getdataHeaders = {};
+const setDataHeaders = {
+  "Content-Type": "application/json",
+};
+const authDataHeaders = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+};
+export {
+  techs,
+  portfolioLinks,
+  movieList,
+  savedlist,
+  BASEURL,
+  getdataHeaders,
+  setDataHeaders,
+  authDataHeaders,
+  MOVIE_BASEURL,
+  getMovieHeaders,
+};

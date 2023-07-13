@@ -1,6 +1,8 @@
 import "./Form.css";
 import { Link } from "react-router-dom";
 import promologo from "../../images/promo__logo.svg";
+import ServerError from "../ServerError/ServerError";
+import { useEffect, useState } from "react";
 function Form({
   title,
   children,
@@ -10,7 +12,16 @@ function Form({
   linkBottomPage,
   textBottomPage,
   isValid,
+  errorMessage,
 }) {
+  console.log("errorMassage", errorMessage);
+
+  // const [message, setMessage] =useState("");
+  // useEffect(()=>{
+
+  //   setMessage(errorMessage);
+  // },[errorMessage])
+
   return (
     <main className="form form-elements">
       <section className="form-container">
@@ -29,6 +40,7 @@ function Form({
           noValidate
         >
           <fieldset className="form-container__fieldset">{children}</fieldset>
+          <ServerError errorMessage={errorMessage} />
           <div className="form-container__link-buttons">
             <button
               className={`form-container__submit ${

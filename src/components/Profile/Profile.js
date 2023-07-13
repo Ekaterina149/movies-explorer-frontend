@@ -1,47 +1,62 @@
 import React, { useEffect } from "react";
+import ServerError from "../ServerError/ServerError";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
+import { useContext } from "react";
 import { useFormAndValidation } from "../../hook/useFormAndValidation";
-function Profile({ buttonText, route, linkBottomPage, onUpdate }) {
+import { CurrentUserContext } from "../../utils/context/CurrentUserContext";
+function Profile({
+  buttonText,
+  route,
+  linkBottomPage,
+  onUpdate,
+  errorMessage,
+  onLogOut,
+  onEdit,
+}) {
   const { values, handleChange, errors, isValid, resetForm, setIsValid } =
     useFormAndValidation();
 
   const [isEdited, SetEdited] = useState(false);
   const [isEditedForm, SetEditedForm] = useState(false);
-  const [userData, setUserData] = useState({
-    name: "Виталий",
-    email: "pochta@inbox.ru",
-  });
-  const [message, setMessage] = useState("");
-  const existingEmail = "katerina@inbox.com";
-  useEffect(() => {
-    if (isEditedForm) SetEdited(true);
-    resetForm(userData);
-  }, [isEditedForm, userData, resetForm]);
+
+  const userData = useContext(CurrentUserContext);
 
   useEffect(() => {
-    if (values.email === existingEmail) {
+    if (isEditedForm) {
+      SetEdited(true);
+    }
+  }, [isEditedForm, userData]);
+
+  useEffect(() => {
+    if (errorMessage) {
       setIsValid(false);
-      setMessage("При обновлении профиля произошла ошибка");
-    } else setMessage("");
-  }, [values, setIsValid, setMessage]);
+      if (values.email !== userData.email || values.name !== userData.name)
+        onEdit("");
+    } else if (
+      values.email === userData.email &&
+      values.name === userData.name
+    ) {
+      setIsValid(false);
+      onEdit("Вы ввели и почту и имя такие же как у Вас сейчас");
+    }
+  }, [errorMessage, values.email, values.name]);
 
   function handleSubmit(evt) {
     const { name, email } = values;
+
     evt.preventDefault();
     if (isValid) {
-      // debugger;
-      setUserData({ name, email });
       onUpdate({ name, email });
-
+      resetForm();
       SetEdited(false);
       SetEditedForm(false);
     }
   }
   function handleShowSubmit() {
     SetEditedForm(true);
-    //debugger;
+    onEdit("");
   }
 
   return (
@@ -65,13 +80,13 @@ function Profile({ buttonText, route, linkBottomPage, onUpdate }) {
               type="text"
               name="name"
               placeholder={userData.name}
-              value={isEdited ? values.name : userData.name}
+              value={isEdited ? values.name : ""}
               minLength="3"
               maxLength="30"
               pattern="^[a-zA-ZА-Яа-яЁё\s\-]+$"
               required
               onChange={(e) => {
-                SetEdited(true);
+                // SetEdited(true);
                 handleChange(e);
               }}
               disabled={!isEdited}
@@ -93,9 +108,9 @@ function Profile({ buttonText, route, linkBottomPage, onUpdate }) {
               name="email"
               placeholder={userData.email}
               // required
-              value={isEdited ? values.email : userData.email}
+              value={isEdited ? values.email : ""}
               onChange={(e) => {
-                SetEdited(true);
+                // SetEdited(true);
                 handleChange(e);
               }}
               disabled={!isEdited}
@@ -106,7 +121,7 @@ function Profile({ buttonText, route, linkBottomPage, onUpdate }) {
           </label>
 
           <div className="profile-container__link-buttons">
-            <p className="profile-container__text">{message}</p>
+            <ServerError errorMessage={errorMessage} />
             {isEdited ? (
               <button
                 className={`profile-container__submit ${
@@ -114,7 +129,7 @@ function Profile({ buttonText, route, linkBottomPage, onUpdate }) {
                 }`}
                 type="submit"
                 aria-label={buttonText}
-                disabled={!isValid && true}
+                disabled={!isValid}
               >
                 {buttonText}
               </button>
@@ -129,7 +144,11 @@ function Profile({ buttonText, route, linkBottomPage, onUpdate }) {
                   {"Редактировать"}
                 </button>
                 <p className="profile-container__text">
-                  <Link className="profile-container__link" to={route}>
+                  <Link
+                    className="profile-container__link"
+                    onClick={onLogOut}
+                    to={route}
+                  >
                     {linkBottomPage}
                   </Link>
                 </p>

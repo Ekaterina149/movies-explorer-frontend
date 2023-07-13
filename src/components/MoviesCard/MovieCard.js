@@ -1,40 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MovieCard.css";
 import { useState } from "react";
 // import { movieList } from "../../utils/constants.js";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
-function MovieCard({ card, onLike }) {
-  // const { name, duration, image } = movieList[0];
-
-  // const { name, duration, image } = card;
-  const { pathname } = useLocation();
-  const [isLiked, setLiked] = useState(false);
-  function deleteMovie(card) {}
-  function addToSelected() {
-    setLiked(!isLiked);
-    onLike(card);
-  }
+import { Link, useLocation } from "react-router-dom";
+function MovieCard({ card, children }) {
   return (
     <article className="moviecard">
-      <img
-        className="moviecard__image"
-        alt="Картинка фильма"
-        src={card?.image}
-      />
+      <Link className="moviecard__link" to={card.trailerLink} target="_blank">
+        <img
+          className="moviecard__image"
+          alt="Картинка фильма"
+          src={card.image}
+        />
+      </Link>
       <div className="moviecard-box">
-        <p className="moviecard-box__title">{card?.name}</p>
-        <button
-          className={`moviecard-box__like-button ${
-            pathname === "/saved-movies" &&
-            "moviecard-box__like-button_type_delete"
-          } ${isLiked ? "moviecard-box__like-button_type_active" : ""} `}
-          onClick={() => {
-            onLike && addToSelected();
-          }}
-        ></button>
+        <p className="moviecard-box__title">{card.nameRU}</p>
+        {children}
       </div>
-      <p className="moviecard__duration">{card?.duration}</p>
+      <p className="moviecard__duration">{`${Math.floor(card.duration / 60)}ч ${
+        card.duration % 60
+      }м`}</p>
     </article>
   );
 }

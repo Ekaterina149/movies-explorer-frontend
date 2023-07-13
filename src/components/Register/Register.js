@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "../Form/Form";
 import { useFormAndValidation } from "../../hook/useFormAndValidation";
-function Register({ onRegister }) {
+function Register({ onRegister, errorMessage, onErrorMessage }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
+  // сбросим ошибку сервера
+  useEffect(() => {
+    if (errorMessage) {
+      onErrorMessage("");
+    }
+  }, [values.name, values.email, values.password]);
 
   function handleSubmit(evt) {
     const { name, email, password } = values;
@@ -23,6 +29,7 @@ function Register({ onRegister }) {
       linkBottomPage={"Войти"}
       textBottomPage={"Уже зарегистрированы?"}
       isValid={isValid}
+      errorMessage={errorMessage}
     >
       <>
         <label className="form-item">
@@ -39,7 +46,7 @@ function Register({ onRegister }) {
             value={values.name || ""}
             minLength="3"
             maxLength="30"
-            // pattern="^[a-zA-ZА-Яа-яЁё\s\-]+$"
+            pattern="^[a-zA-ZА-Яа-яЁё\s\-]+$"
             required
             onChange={handleChange}
           />
@@ -81,7 +88,6 @@ function Register({ onRegister }) {
             value={values.password || ""}
             minLength="3"
             maxLength="30"
-            // pattern="^[a-zA-Z0-9]+$"
             required
             onChange={handleChange}
           />

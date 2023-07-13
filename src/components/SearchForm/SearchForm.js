@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useFormAndValidation } from "../../hook/useFormAndValidation";
-function SearchForm({ onSearchFilm }) {
-  const { values, handleChange, errors, isValid, resetForm } =
-    useFormAndValidation();
-
+function SearchForm({ onSearchFilm, onCheckboxPos, shortFilms }) {
+  const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const [error, setErr] = useState("");
   function handleSubmit(evt) {
     const movie = values.movie;
+    // setErr("");
     evt.preventDefault();
     if (isValid) {
       onSearchFilm(movie);
-      resetForm();
     }
+  }
+  function handleSetValid() {
+    setErr(errors.movie);
   }
 
   return (
@@ -28,23 +30,25 @@ function SearchForm({ onSearchFilm }) {
           type="text"
           name="movie"
           placeholder="Фильм"
-          minLength="2"
+          minLength="1"
           required
           value={values.movie || ""}
-          onChange={handleChange}
+          onChange={(evt) => {
+            if (error) setErr("");
+            handleChange(evt);
+          }}
         ></input>
-        <span className="search-form__input-error">{errors.movie || ""}</span>
+        <span className="search-form__input-error">{error || ""}</span>
         <button
-          className={`search-form__submit ${
-            !isValid && "search-form__submit_type_disabled"
-          } `}
+          className={`search-form__submit ${!isValid && ""} `}
           type="submit"
           aria-label="Найти"
-          disabled={!isValid}
+          // disabled={!isValid}
+          onClick={handleSetValid}
         />
       </div>
 
-      <FilterCheckbox />
+      <FilterCheckbox onCheckboxPos={onCheckboxPos} shortFilms={shortFilms} />
     </form>
   );
 }
