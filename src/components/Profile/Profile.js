@@ -32,8 +32,10 @@ function Profile({
   useEffect(() => {
     if (errorMessage) {
       setIsValid(false);
-      if (values.email !== userData.email || values.name !== userData.name)
-        onEdit("");
+      if (values.email !== userData.email || values.name !== userData.name) {
+        if (errorMessage === "Вы ввели и почту и имя такие же как у Вас сейчас")
+          onEdit("");
+      }
     } else if (
       values.email === userData.email &&
       values.name === userData.name
@@ -80,7 +82,7 @@ function Profile({
               type="text"
               name="name"
               placeholder={userData.name}
-              value={isEdited ? values.name : ""}
+              value={values.name || ""}
               minLength="3"
               maxLength="30"
               pattern="^[a-zA-ZА-Яа-яЁё\s\-]+$"
@@ -108,7 +110,7 @@ function Profile({
               name="email"
               placeholder={userData.email}
               // required
-              value={isEdited ? values.email : ""}
+              value={values.email || ""}
               onChange={(e) => {
                 // SetEdited(true);
                 handleChange(e);
@@ -121,17 +123,17 @@ function Profile({
           </label>
 
           <div className="profile-container__link-buttons">
-            <ServerError errorMessage={errorMessage} />
+            <ServerError errorMessage={errorMessage || ""} />
             {isEdited ? (
               <button
                 className={`profile-container__submit ${
                   !isValid && "profile-container__submit_type_disabled"
                 }`}
                 type="submit"
-                aria-label={buttonText}
+                aria-label={buttonText || ""}
                 disabled={!isValid}
               >
-                {buttonText}
+                {buttonText || ""}
               </button>
             ) : (
               <>

@@ -78,7 +78,9 @@ function SavedMovies({ savedMovies, onDeleteMovie, apiError, onApiError }) {
       <PopupApiError
         isError={apiError}
         onClose={closePopup}
-        message={"Что-то пошло не так!"}
+        message={
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+        }
       />
     </main>
   );
