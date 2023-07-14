@@ -80,7 +80,7 @@ const savedlist = [
   { name: "В погоне за Бенкси", duration: "1ч 42м", image: pic_Banksy },
 ];
 const MOVIE_BASEURL = "https://api.nomoreparties.co/beatfilm-movies";
-const BASEURL = "http://localhost:3000";
+const BASEURL = "https://api.hexediploma.nomoredomains.rocks";
 const getMovieHeaders = {
   "Content-Type": "application/json",
 };
