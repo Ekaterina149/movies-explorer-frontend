@@ -49,3 +49,5 @@
 
 - [Ссылка на макет] https://drive.google.com/file/d/1pS-MjfrDhjssX-lbgmIzPQfatIg_NPxp/view?usp=sharing
 - [Ссылка на сайт] https://hexediploma.nomoredomains.rocks
+-[Ссылка на pull-request] https://github.com/Ekaterina149/movies-explorer-frontend/pull/2
+-
