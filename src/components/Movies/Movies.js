@@ -8,6 +8,7 @@ import movieApi from "../../utils/MovieApi";
 import Message from "../Message/Message";
 import PopupApiError from "../PopupApiError/PopupApiError";
 import SearchForm from "../SearchForm/SearchForm";
+import { MOVIE_BASEURL_PIC } from "../../utils/constants";
 import { filterMovies, filterShortMovies } from "../../utils/utils";
 function Movies({
   onSaveMovie,
@@ -44,23 +45,27 @@ function Movies({
     setShortFilms(!shortFilms);
     localStorage.setItem("checkbox", !shortFilms);
   }
-  // функция фильтрации фильмов по ключевому слову и положению тумблера короткометражек
-  function handleFilterMovie() {
-    if (!allFilms.length) return;
 
-    const searchMovies = filterMovies(allFilms, search);
+  function handleCheckFilteredMovies(arr) {
+    arr.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
+  }
 
-    setFilteredMovies(searchMovies);
-    localStorage.setItem("movies", searchMovies);
+  function handleFilterMovie(movies, search, checkbox) {
+    const moviesList = filterMovies(movies, search);
+    setFilteredMovies(
+      checkbox === true ? filterShortMovies(moviesList) : moviesList
+    );
+    localStorage.setItem("movies", moviesList);
   }
 
   // функция обработчик отправки запроса
   function handleSubmit(keyword) {
+    setLoading(true);
     setSearch(keyword);
     localStorage.setItem("search", keyword);
     localStorage.setItem("checkbox", shortFilms);
     if (!allFilms.length) {
-      setLoading(true);
+      // setLoading(true);
       movieApi
         .getMovies()
         .then((data) => {
@@ -70,64 +75,74 @@ function Movies({
             duration: item["duration"],
             year: item["year"],
             description: item["description"],
-            image: `https://api.nomoreparties.co${item["image"]["url"]}`,
+            image: `${MOVIE_BASEURL_PIC}${item["image"]["url"]}`,
             trailerLink: item["trailerLink"],
-            thumbnail: `https://api.nomoreparties.co${item["image"]["url"]}`,
+            thumbnail: `${MOVIE_BASEURL_PIC}${item["image"]["url"]}`,
             movieId: item["id"],
             nameRU: item["nameRU"],
             nameEN: item["nameEN"],
           }));
           setAllFilms(res);
+          handleFilterMovie(res, keyword, shortFilms);
+          handleCheckFilteredMovies(res);
         })
         .catch((err) => {
           console.log("film error", err);
           onApiError(true);
         })
         .finally(() => setLoading(false));
+    } else {
+      handleFilterMovie(allFilms, keyword, shortFilms);
+      setLoading(false);
+      handleCheckFilteredMovies(allFilms);
     }
   }
   // функция закрытия попапа с ошибкой
   function closePopup() {
     onApiError(false);
   }
-
-  // фильтруем фильмы по новому запросу
-  useEffect(handleFilterMovie, [search, shortFilms, allFilms]);
   useEffect(() => {
-    if (search !== "") {
-      setIsNotSearched(false);
-      const arr = shortFilms
-        ? filterShortMovies(filteredMovies)
-        : filteredMovies;
-      arr.length ? setIsNothingFound(false) : setIsNothingFound(true);
-    }
-  }, [search, shortFilms, allFilms]);
-  //функция возвращающая разметку в зависимости от состояния стейтов
-  function movieContainer() {
-    if (isLoaging) return <Preloader />;
-    if (isNothingFound) return <Message message={"Ничего не найдено"} />;
-    if (isNotSearched) return <Message message={"Вы пока ничего не искали"} />;
-    return (
-      <MovieCardList
-        isSavedMoviePage={false}
-        savedMovies={savedMovies}
-        onSaveMovie={onSaveMovie}
-        onDeleteMovie={onDeleteMovie}
-        movieList={
-          shortFilms ? filterShortMovies(filteredMovies) : filteredMovies
-        }
-      />
-    );
-  }
+    const arr = localStorage.getItemOrDefault("movies", null);
+    const searchQuery = localStorage.getItemOrDefault("search", null);
+
+    if (arr) {
+      setShortFilms(localStorage.getItemOrDefault("checkbox", false));
+      setFilteredMovies(shortFilms === true ? filterShortMovies(arr) : arr);
+      if (shortFilms)
+        filterShortMovies(arr).length === 0
+          ? setIsNothingFound(true)
+          : setIsNothingFound(false);
+      else
+        arr.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
+      if (searchQuery || search) setIsNotSearched(false);
+    } else if (searchQuery || search) setIsNotSearched(false);
+    else setIsNotSearched(true);
+  }, [shortFilms, search, isNotSearched]);
+
   return (
     <main className="movie-content">
       <SearchForm
         onSearchFilm={handleSubmit}
+        queryMovie={search}
         // filteredMovies={filteredMovies}
         onCheckboxPos={handleShortFilms}
         shortFilms={shortFilms}
       />
-      {movieContainer()}
+      {isLoaging ? (
+        <Preloader />
+      ) : isNothingFound || isNotSearched ? (
+        <Message
+          message={isNotSearched ? "Вы ничего не искали" : "Ничего не найдено"}
+        />
+      ) : (
+        <MovieCardList
+          isSavedMoviePage={false}
+          savedMovies={savedMovies}
+          onSaveMovie={onSaveMovie}
+          onDeleteMovie={onDeleteMovie}
+          movieList={filteredMovies}
+        />
+      )}
       <PopupApiError
         isError={apiError}
         onClose={closePopup}

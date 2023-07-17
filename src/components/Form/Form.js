@@ -14,13 +14,10 @@ function Form({
   isValid,
   errorMessage,
 }) {
-  console.log("errorMassage", errorMessage);
-
-  // const [message, setMessage] =useState("");
-  // useEffect(()=>{
-
-  //   setMessage(errorMessage);
-  // },[errorMessage])
+  function preventHandler(evt) {
+    evt.preventDefault();
+    onSubmit(evt);
+  }
 
   return (
     <main className="form form-elements">
@@ -36,7 +33,7 @@ function Form({
         <form
           className="form-container__form"
           method="get"
-          onSubmit={onSubmit}
+          onSubmit={preventHandler}
           noValidate
         >
           <fieldset className="form-container__fieldset">{children}</fieldset>

@@ -1,11 +1,11 @@
 import React from "react";
 import Form from "../Form/Form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFormAndValidation } from "../../hook/useFormAndValidation";
 function Login({ onLogin, errorMessage, onErrorMessage }) {
   console.log("errorMassageLogin", errorMessage);
   const { values, handleChange, errors, isValid, resetForm } =
-    useFormAndValidation();
+    useFormAndValidation(false);
   // сбросим ошибку сервера
   useEffect(() => {
     if (errorMessage) {
@@ -13,14 +13,19 @@ function Login({ onLogin, errorMessage, onErrorMessage }) {
     }
   }, [values.email, values.password]);
 
+  const [pending, setPending] = useState(false);
   function handleSubmit(evt) {
+    if (pending) return;
+
     const { name, email, password } = values;
-    evt.preventDefault();
     if (isValid) {
-      onLogin({ name, email, password });
-      resetForm();
+      setPending(true);
+      onLogin({ name, email, password })
+        .catch(() => resetForm(values, {}, false))
+        .finally(() => setPending(false));
     }
   }
+  useEffect(() => resetForm({}, {}, false), []);
 
   return (
     <Form

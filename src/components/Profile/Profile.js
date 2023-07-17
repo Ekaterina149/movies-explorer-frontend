@@ -15,47 +15,47 @@ function Profile({
   onLogOut,
   onEdit,
 }) {
-  const { values, handleChange, errors, isValid, resetForm, setIsValid } =
+  const userData = useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
 
   const [isEdited, SetEdited] = useState(false);
   const [isEditedForm, SetEditedForm] = useState(false);
 
-  const userData = useContext(CurrentUserContext);
+  useEffect(() => {
+    // alert();
+    resetForm({ name: userData.name, email: userData.email });
+  }, [userData]);
 
   useEffect(() => {
     if (isEditedForm) {
       SetEdited(true);
+      resetForm({ name: userData.name, email: userData.email }, {}, false);
     }
   }, [isEditedForm, userData]);
 
   useEffect(() => {
-    if (errorMessage) {
-      setIsValid(false);
-      if (values.email !== userData.email || values.name !== userData.name) {
-        if (errorMessage === "Вы ввели и почту и имя такие же как у Вас сейчас")
-          onEdit("");
-      }
-    } else if (
-      values.email === userData.email &&
-      values.name === userData.name
-    ) {
-      setIsValid(false);
-      onEdit("Вы ввели и почту и имя такие же как у Вас сейчас");
+    if (values.email === userData.email && values.name === userData.name) {
+      resetForm(values, {}, false);
     }
   }, [errorMessage, values.email, values.name]);
 
+  const [pending, setPending] = useState(false);
   function handleSubmit(evt) {
-    const { name, email } = values;
-
     evt.preventDefault();
+    if (pending) return;
+
+    const { name, email } = values;
     if (isValid) {
-      onUpdate({ name, email });
+      setPending(true);
+
+      onUpdate({ name, email }).finally(() => setPending(false));
       resetForm();
       SetEdited(false);
       SetEditedForm(false);
     }
   }
+
   function handleShowSubmit() {
     SetEditedForm(true);
     onEdit("");
@@ -64,7 +64,9 @@ function Profile({
   return (
     <main className="profile">
       <div className="profile-container">
-        <h2 className="profile-container__header">{`Привет, ${userData.name}!`}</h2>
+        <h2 className="profile-container__header">
+          Привет, {`${userData.name}!`}
+        </h2>
         <form
           className="profile-container__form"
           method="get"

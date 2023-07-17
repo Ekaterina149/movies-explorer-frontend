@@ -2,9 +2,21 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./MovieCardList.css";
 import MovieCard from "../MoviesCard/MovieCard";
-import Preloader from "../Preloader/Preloader";
 import LikeButton from "../LikeButton/LikeButton";
 import DeleteButton from "../DeleteButton/DeleteButton";
+import {
+  MAX_WIDTH_QUANTITY,
+  BRAKEPOINT_WIDTH_QUANTITY_1280,
+  BRAKEPOINT_WIDTH_QUANTITY_760,
+  BRAKEPOINT_WIDTH_QUANTITY_320,
+  MAX_WIDTH_ADD_QUANTITY,
+  BRAKEPOINT_WIDTH_ADD_QUANTITY_1280,
+  BRAKEPOINT_WIDTH_ADD_QUANTITY_760,
+  BRAKEPOINT_WIDTH_ADD_QUANTITY_320,
+  MAX_WIDTH,
+  MID_WIDTH,
+  MIN_WIDTH,
+} from "../../utils/constants";
 
 import { useWindowWidth } from "../../hook/useWindowWidth";
 
@@ -20,15 +32,27 @@ function MovieCardList({
   const [cardsShowParams, setCardsShowParams] = useState({ sum: 0, more: 0 });
   const width = useWindowWidth();
   function handleGrid() {
-    if (width > 1331) {
+    if (width > MAX_WIDTH) {
       //XL
-      setCardsShowParams({ sum: 8, more: 3 });
-    } else if (width <= 1331 && width > 1027) {
-      setCardsShowParams({ sum: 12, more: 3 });
-    } else if (width <= 1027 && width > 629) {
-      setCardsShowParams({ sum: 8, more: 2 });
-    } else if (width <= 629) {
-      setCardsShowParams({ sum: 5, more: 2 });
+      setCardsShowParams({
+        sum: MAX_WIDTH_QUANTITY,
+        more: MAX_WIDTH_ADD_QUANTITY,
+      });
+    } else if (width <= MAX_WIDTH && width > MID_WIDTH) {
+      setCardsShowParams({
+        sum: BRAKEPOINT_WIDTH_QUANTITY_1280,
+        more: BRAKEPOINT_WIDTH_ADD_QUANTITY_1280,
+      });
+    } else if (width <= MID_WIDTH && width > MIN_WIDTH) {
+      setCardsShowParams({
+        sum: BRAKEPOINT_WIDTH_QUANTITY_760,
+        more: BRAKEPOINT_WIDTH_ADD_QUANTITY_760,
+      });
+    } else if (width <= MIN_WIDTH) {
+      setCardsShowParams({
+        sum: BRAKEPOINT_WIDTH_QUANTITY_320,
+        more: BRAKEPOINT_WIDTH_ADD_QUANTITY_320,
+      });
     }
     handleUpdateList();
   }

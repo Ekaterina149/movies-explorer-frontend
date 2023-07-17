@@ -13,11 +13,10 @@ function Navigation({ isLoggedIn }) {
           <Link className="navigation-register" to="/signup">
             {"Регистрация"}
           </Link>
-          <button className="navigation-button">
-            <Link className="navigation-login" to="/signin">
+
+            <Link className="navigation-login navigation-button" role="button" to="/signin">
               {"Войти"}
             </Link>
-          </button>{" "}
         </>
       )}
     </nav>

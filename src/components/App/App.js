@@ -12,15 +12,19 @@ import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import Mistake from "../Mistake/Mistake";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Preloader from "../Preloader/Preloader";
 import { mainApiAuth, mainApi } from "../../utils/MainApi";
 import { CurrentUserContext } from "../../utils/context/CurrentUserContext";
+import PopupSuccess from "../PopupSucsess/PopupSuccess";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoaging, setIsLoaging] = React.useState(true);
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
   const [regErrorMessage, setRegErrorMessage] = useState("");
   const [logErrorMessage, setLogErrorMessage] = useState("");
   const [profErrorMessage, setProfErrorMessage] = useState("");
+  const [editSuccessMessage, setEditSuccessMessage] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const [savedMovies, setSavedMovies] = useState([]);
@@ -28,11 +32,11 @@ function App() {
   const navigate = useNavigate();
   function handleRegister(data) {
     setRegErrorMessage("");
-    mainApi
+    return mainApi
       .register(data)
       .then((servdata) => {
         console.log("regData", servdata);
-        navigate("/signin");
+        handleLogin(data);
       })
       .catch((err) => {
         setRegErrorMessage(err.message);
@@ -40,7 +44,7 @@ function App() {
       });
   }
   function handleLogin(data) {
-    mainApi
+    return mainApi
       .authorize(data)
       .then((servdata) => {
         console.log("logData", servdata);
@@ -48,7 +52,7 @@ function App() {
         localStorage.setItem("userId", servdata._id);
         setCurrentUser({ name: servdata.name, email: servdata.email });
         setIsLoggedIn(true);
-        navigate("/");
+        navigate("/movies");
       })
       .catch((err) => {
         setLogErrorMessage(err.message);
@@ -56,11 +60,12 @@ function App() {
       });
   }
   function handleEditProfile(data) {
-    mainApiAuth
+    return mainApiAuth
       .updateUserInfo(data.name, data.email)
       .then((servdata) => {
         console.log("updateUserData", servdata);
         setCurrentUser({ name: servdata.name, email: servdata.email });
+        setEditSuccessMessage(true);
       })
       .catch((err) => {
         setProfErrorMessage(err.message);
@@ -74,7 +79,7 @@ function App() {
         setIsLoggedIn(false);
         localStorage.removeItem("userId");
         console.log("Выход");
-        navigate("/signin");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -112,119 +117,145 @@ function App() {
         setIsError(true);
       });
   }
+  function closeSuccessPopup() {
+    setEditSuccessMessage(false);
+  }
+  useEffect(() => {
+    setIsLoaging(true);
+    mainApiAuth
+      .getUserInfo()
+      .then((userData) => {
+        // debugger;
+        setIsLoggedIn(true);
+        setCurrentUser({ name: userData.name, email: userData.email });
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoggedIn(false);
+      })
+      .finally(() => setIsLoaging(false));
+  }, [isLoggedIn]);
+
   useEffect(() => {
     if (isLoggedIn) {
       mainApiAuth
-        .getUserInfo()
-        .then((userData) => {
-          setCurrentUser({ name: userData.name, email: userData.email });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-      mainApiAuth
         .getUserMovies()
         .then((movieData) => {
-          if (movieData.length) setSavedMovies(movieData);
+          setSavedMovies(movieData);
         })
         .catch((error) => {
           console.log(error);
+          setIsLoggedIn(false);
         });
-      navigate("/movies");
     }
   }, [isLoggedIn]);
-  useEffect(() => setIsLoggedIn(!!localStorage.getItem("userId")), []);
+  // useEffect(() => setIsLoggedIn(!!localStorage.getItem("userId")), []);
 
   // console.log(selList);
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        {pathname === "/movies" ||
-        pathname === "/" ||
-        pathname === "/saved-movies" ||
-        pathname === "/profile" ? (
-          <Header isLoggedIn={isLoggedIn} />
+        {}
+        {isLoaging ? (
+          <Preloader />
         ) : (
-          ""
-        )}
+          <>
+            {pathname === "/movies" ||
+            pathname === "/" ||
+            pathname === "/saved-movies" ||
+            pathname === "/profile" ? (
+              <Header isLoggedIn={isLoggedIn} />
+            ) : (
+              ""
+            )}
 
-        <Routes>
-          <Route exact path="/" element={<Main isLoggedIn={isLoggedIn} />} />
-          <Route
-            path="/movies"
-            element={
-              <ProtectedRoute
-                component={Movies}
-                onSaveMovie={handleSaveMovie}
-                onDeleteMovie={handleDeleteMovie}
-                isLoggedIn={isLoggedIn}
-                savedMovies={savedMovies}
-                apiError={isError}
-                onApiError={setIsError}
+            <Routes>
+              <Route
+                exact
+                path="/"
+                element={<Main isLoggedIn={isLoggedIn} />}
               />
-            }
-          />
-          <Route
-            path="/saved-movies"
-            element={
-              <ProtectedRoute
-                component={SavedMovies}
-                isLoggedIn={isLoggedIn}
-                savedMovies={savedMovies}
-                onDeleteMovie={handleDeleteMovie}
-                apiError={isError}
-                onApiError={setIsError}
+              <Route
+                path="/movies"
+                element={
+                  <ProtectedRoute
+                    component={Movies}
+                    onSaveMovie={handleSaveMovie}
+                    onDeleteMovie={handleDeleteMovie}
+                    isLoggedIn={isLoggedIn}
+                    savedMovies={savedMovies}
+                    apiError={isError}
+                    onApiError={setIsError}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute
-                component={Profile}
-                isLoggedIn={isLoggedIn}
-                buttonText="Сохранить"
-                errorMessage={profErrorMessage}
-                route="/"
-                linkBottomPage="Выйти из аккаунта"
-                onUpdate={handleEditProfile}
-                onLogOut={handleLogOut}
-                onEdit={setProfErrorMessage}
+              <Route
+                path="/saved-movies"
+                element={
+                  <ProtectedRoute
+                    component={SavedMovies}
+                    isLoggedIn={isLoggedIn}
+                    savedMovies={savedMovies}
+                    onDeleteMovie={handleDeleteMovie}
+                    apiError={isError}
+                    onApiError={setIsError}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <Register
-                onRegister={handleRegister}
-                errorMessage={regErrorMessage}
-                onErrorMessage={setRegErrorMessage}
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute
+                    component={Profile}
+                    isLoggedIn={isLoggedIn}
+                    buttonText="Сохранить"
+                    errorMessage={profErrorMessage}
+                    route="/"
+                    linkBottomPage="Выйти из аккаунта"
+                    onUpdate={handleEditProfile}
+                    onLogOut={handleLogOut}
+                    onEdit={setProfErrorMessage}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/signin"
-            element={
-              <Login
-                onLogin={handleLogin}
-                errorMessage={logErrorMessage}
-                onErrorMessage={setLogErrorMessage}
+              <Route
+                path="/signup"
+                element={
+                  <Register
+                    onRegister={handleRegister}
+                    errorMessage={regErrorMessage}
+                    onErrorMessage={setRegErrorMessage}
+                  />
+                }
               />
-            }
-          />
-          <Route path="*" element={<Mistake />} />
-        </Routes>
+              <Route
+                path="/signin"
+                element={
+                  <Login
+                    onLogin={handleLogin}
+                    errorMessage={logErrorMessage}
+                    onErrorMessage={setLogErrorMessage}
+                  />
+                }
+              />
+              <Route path="*" element={<Mistake />} />
+            </Routes>
 
-        {pathname === "/movies" ||
-        pathname === "/" ||
-        pathname === "/saved-movies" ? (
-          <Footer />
-        ) : (
-          ""
+            {pathname === "/movies" ||
+            pathname === "/" ||
+            pathname === "/saved-movies" ? (
+              <Footer />
+            ) : (
+              ""
+            )}
+          </>
         )}
       </div>
+      <PopupSuccess
+        isError={editSuccessMessage}
+        message={"Вы успешно изменили данные"}
+        onClose={closeSuccessPopup}
+      />
     </CurrentUserContext.Provider>
   );
 }

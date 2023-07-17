@@ -1,34 +1,21 @@
-// функция фильтрации фильмов по ключевому слову
-// function filterMovies(movieList, keyword) {
-//   const words = keyword.toLowerCase().split(" ");
+import { SHORT_FILM_DUR } from "./constants";
 
-//   const list = movieList.filter((movie) => {
-//     const isRU = movie.nameRU
-//       .toLowerCase()
-//       .split(" ")
-//       .find((word) => words.includes(word));
-//     const isEN = movie.nameEN
-//       .toLowerCase()
-//       .split(" ")
-//       .find((word) => words.includes(word));
-
-//     return isRU || isEN;
-//   });
-//   return list;
-// }
-
-function filterMovies(movies, search) {
+function filterMovies(movies, search, shortFilms) {
   const searchWords = search.trim().toLowerCase();
   function checkName(name) {
     return name.toLowerCase().indexOf(searchWords) > -1;
   }
-  return movies.filter(
+  const moviesSearch = movies.filter(
     (movie) => checkName(movie.nameRU) || checkName(movie.nameEN)
   );
+  if (shortFilms === true) {
+    return filterShortMovies(moviesSearch);
+  }
+  return moviesSearch;
 }
 // функция фильтрации фильмов по длительности (короткометражки)
 function filterShortMovies(movies) {
-  return movies.filter((film) => film.duration < 40);
+  return movies.filter((film) => film.duration < SHORT_FILM_DUR);
 }
 
 export { filterMovies, filterShortMovies };

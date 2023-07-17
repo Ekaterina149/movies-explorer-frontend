@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useFormAndValidation } from "../../hook/useFormAndValidation";
-function SearchForm({ onSearchFilm, onCheckboxPos, shortFilms }) {
-  const { values, handleChange, errors, isValid } = useFormAndValidation();
+function SearchForm({ onSearchFilm, onCheckboxPos, shortFilms, queryMovie }) {
+  const { values, handleChange, errors, isValid, setInitValues } = useFormAndValidation();
   const [error, setErr] = useState("");
+
   function handleSubmit(evt) {
     const movie = values.movie;
     // setErr("");
@@ -16,7 +17,9 @@ function SearchForm({ onSearchFilm, onCheckboxPos, shortFilms }) {
   function handleSetValid() {
     setErr(errors.movie);
   }
-
+useEffect(()=>{
+  setInitValues({movie: queryMovie })
+},[queryMovie])
   return (
     <form
       className="search-form"

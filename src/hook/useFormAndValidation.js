@@ -4,22 +4,24 @@ import isEmail from "validator/es/lib/isEmail";
 export function useFormAndValidation() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
   const message = {
     name: "Введите корректное имя, нельзя вводить только пробелы",
     email: "Введите корректный email",
     password: "Введите корректный пароль, нельзя вводить только пробелы",
     movie: "Введите корректное название фильма, нельзя вводить только пробелы",
   };
-
+  const setInitValues = (initValues) => {
+    setValues(initValues);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
 
     if (
-      // e.target.value === "" ||
-      e.target.value.match(/\s/g) !== null &&
-      e.target.value.match(/\s/g).length === e.target.value.length
+      e.target.value === "" ||
+      (e.target.value.match(/\s/g) !== null &&
+        e.target.value.match(/\s/g).length === e.target.value.length)
     ) {
       e.target.setCustomValidity(message[name]);
     } else {
@@ -60,6 +62,7 @@ export function useFormAndValidation() {
   return {
     values,
     handleChange,
+    setInitValues,
     errors,
     isValid,
     resetForm,

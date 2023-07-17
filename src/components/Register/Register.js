@@ -1,6 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "../Form/Form";
 import { useFormAndValidation } from "../../hook/useFormAndValidation";
+
+/**
+ *
+ * @param {{
+ * onRegister: ()=> Promise
+ * }} param0
+ * @returns
+ */
 function Register({ onRegister, errorMessage, onErrorMessage }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
@@ -10,15 +18,20 @@ function Register({ onRegister, errorMessage, onErrorMessage }) {
       onErrorMessage("");
     }
   }, [values.name, values.email, values.password]);
-
+  //не дадим отправляться новому запросу, пока не прошел предыдущий
+  const [pending, setPending] = useState(false);
   function handleSubmit(evt) {
+    if (pending) return;
+
     const { name, email, password } = values;
-    evt.preventDefault();
     if (isValid) {
-      onRegister({ name, email, password });
-      resetForm();
+      setPending(true);
+      onRegister({ name, email, password })
+        .catch(() => resetForm(values, {}, false))
+        .finally(() => setPending(false));
     }
   }
+  useEffect(() => resetForm({}, {}, false), []);
 
   return (
     <Form
