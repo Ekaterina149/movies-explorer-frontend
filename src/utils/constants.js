@@ -29,8 +29,8 @@ const SHORT_FILM_DUR = 40;
 
 const MOVIE_BASEURL = "https://api.nomoreparties.co/beatfilm-movies";
 const MOVIE_BASEURL_PIC = "https://api.nomoreparties.co";
-// const BASEURL = "https://api.hexediploma.nomoredomains.rocks";
-const BASEURL = "http://localhost:3000";
+const BASEURL = "https://api.hexediploma.nomoredomains.rocks";
+// const BASEURL = "http://localhost:3000";
 const getMovieHeaders = {
   "Content-Type": "application/json",
 };
