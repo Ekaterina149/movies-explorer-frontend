@@ -77,7 +77,7 @@ function App() {
       .unauthorize()
       .then(() => {
         setIsLoggedIn(false);
-        localStorage.removeItem("userId");
+        localStorage.clear();
         console.log("Выход");
         navigate("/");
       })
