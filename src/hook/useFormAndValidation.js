@@ -1,5 +1,7 @@
 import { useState, useCallback } from "react";
-import isEmail from "validator/es/lib/isEmail";
+//для валидации применяю ту же библиотеку Joi, что и в миддлваре валидации на
+// стороне бэкенда
+const Joi = require("joi");
 
 export function useFormAndValidation() {
   const [values, setValues] = useState({});
@@ -35,11 +37,17 @@ export function useFormAndValidation() {
 
       // e.target.setCustomValidity("");
     }
-
+    //для валидации применяю ту же библиотеку Joi, что и в миддлваре валидации на
+    // стороне бэкенда
     if (name === "email") {
-      if (!isEmail(value)) {
-        // debugger;
-        e.target.setCustomValidity(message[name]);
+      const schema = Joi.string()
+        .email({ tlds: { allow: false } })
+        .messages({
+          "string.email": message.email,
+        });
+      const validationResult = schema.validate(values.email);
+      if (validationResult.error) {
+        e.target.setCustomValidity(validationResult.error.message);
       } else {
         e.target.setCustomValidity("");
       }

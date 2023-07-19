@@ -18,8 +18,9 @@ function Movies({
   onApiError,
 }) {
   const localStorage = useLocalStorage();
-  // стейт - все фильмы
+
   const [allFilms, setAllFilms] = useState([]);
+
   // стейт  - фильмы отфильтрованные по ключевому слову
   const [filteredMovies, setFilteredMovies] = useState(
     localStorage.getItemOrDefault("movies", [])
@@ -60,6 +61,7 @@ function Movies({
 
   // функция обработчик отправки запроса
   function handleSubmit(keyword) {
+    // debugger;
     setLoading(true);
     setSearch(keyword);
     localStorage.setItem("search", keyword);
@@ -101,23 +103,26 @@ function Movies({
   function closePopup() {
     onApiError(false);
   }
-  useEffect(() => {
-    const arr = localStorage.getItemOrDefault("movies", null);
-    const searchQuery = localStorage.getItemOrDefault("search", null);
 
-    if (arr) {
+  useEffect(() => {
+    const arr = localStorage.getItemOrDefault("movies", []);
+    if (arr && !search) {
+      setIsNotSearched(false);
       setShortFilms(localStorage.getItemOrDefault("checkbox", false));
       setFilteredMovies(shortFilms === true ? filterShortMovies(arr) : arr);
-      if (shortFilms)
-        filterShortMovies(arr).length === 0
-          ? setIsNothingFound(true)
-          : setIsNothingFound(false);
-      else
-        arr.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
-      if (searchQuery || search) setIsNotSearched(false);
-    } else if (searchQuery || search) setIsNotSearched(false);
-    else setIsNotSearched(true);
-  }, [shortFilms, search, isNotSearched]);
+      handleCheckFilteredMovies(arr);
+    } else setIsNotSearched(true);
+  }, [shortFilms, search]);
+
+  useEffect(() => {
+    if (search) {
+      if (!allFilms.length) handleSubmit(search);
+      setIsNotSearched(false);
+      const arr = filterMovies(allFilms, search, shortFilms);
+      setFilteredMovies(arr);
+      handleCheckFilteredMovies(arr);
+    } else setIsNotSearched(true);
+  }, [search, shortFilms, allFilms]);
 
   return (
     <main className="movie-content">

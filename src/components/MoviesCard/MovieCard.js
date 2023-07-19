@@ -1,8 +1,5 @@
-import React, { useEffect } from "react";
 import "./MovieCard.css";
-import { useState } from "react";
-// import { movieList } from "../../utils/constants.js";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 function MovieCard({ card, children }) {
   return (
     <article className="moviecard">

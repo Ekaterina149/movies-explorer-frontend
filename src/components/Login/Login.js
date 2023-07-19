@@ -3,7 +3,6 @@ import Form from "../Form/Form";
 import { useEffect, useState } from "react";
 import { useFormAndValidation } from "../../hook/useFormAndValidation";
 function Login({ onLogin, errorMessage, onErrorMessage }) {
-  console.log("errorMassageLogin", errorMessage);
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation(false);
   // сбросим ошибку сервера

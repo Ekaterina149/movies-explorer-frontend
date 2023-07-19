@@ -2,7 +2,6 @@ import "./Form.css";
 import { Link } from "react-router-dom";
 import promologo from "../../images/promo__logo.svg";
 import ServerError from "../ServerError/ServerError";
-import { useEffect, useState } from "react";
 function Form({
   title,
   children,

@@ -26,46 +26,26 @@ function SavedMovies({ savedMovies, onDeleteMovie, apiError, onApiError }) {
   function handleFilterMovie() {
     console.log("movieList", savedMovies);
     if (!search.length) return setFilteredMovies(savedMovies);
-    const list = filterMovies(savedMovies, search);
+    const list = filterMovies(savedMovies, search, shortFilms);
     setFilteredMovies(list);
   }
   //функия обработчик поиска по ключевому слову
   function handleSubmitFilm(keyword) {
     setSearch(keyword);
-    handleFilterMovie(savedMovies, keyword, shortFilms);
+    handleFilterMovie();
   }
-  console.log(savedMovies);
+
   // функция закрытия попапа с ошибкой
   function closePopup() {
     onApiError(false);
   }
 
-  useEffect(handleFilterMovie, [search, shortFilms, savedMovies]);
   useEffect(() => {
-    if (savedMovies.length) {
-      const arr = shortFilms
-        ? filterShortMovies(filteredMovies)
-        : filteredMovies;
-      arr.length ? setIsNothingFound(false) : setIsNothingFound(true);
-    }
-  }, [search, shortFilms, savedMovies, filteredMovies]);
-  //функция возвращающая разметку в зависимости от состояния стейтов
-  function movieContainer() {
-    if (isNothingFound) return <Message message={"Ничего не найдено"} />;
-    if (!savedMovies.length)
-      return <Message message={"Нет сохраненных фильмов"} />;
-    return (
-      <MovieCardList
-        isSavedMoviePage={true}
-        savedMovies={savedMovies}
-        onDeleteMovie={onDeleteMovie}
-        movieList={
-          shortFilms ? filterShortMovies(filteredMovies) : filteredMovies
-        }
-        isNothingFound={isNothingFound}
-      />
-    );
-  }
+    const arr = filterMovies(savedMovies, search, shortFilms);
+    setFilteredMovies(arr);
+    setIsNothingFound(false);
+    if (arr.length === 0) setIsNothingFound(true);
+  }, [savedMovies, search, shortFilms]);
 
   return (
     <main className="movie-content">
@@ -74,7 +54,20 @@ function SavedMovies({ savedMovies, onDeleteMovie, apiError, onApiError }) {
         onCheckboxPos={handleShortFilms}
         shortFilms={shortFilms}
       />
-      {movieContainer()}
+      {!savedMovies.length ? (
+        <Message message={"Нет сохраненных фильмов"} />
+      ) : isNothingFound ? (
+        <Message message={"Ничего не найдено"} />
+      ) : (
+        <MovieCardList
+          isSavedMoviePage={true}
+          savedMovies={savedMovies}
+          onDeleteMovie={onDeleteMovie}
+          movieList={
+            shortFilms ? filterShortMovies(filteredMovies) : filteredMovies
+          }
+        />
+      )}
       <PopupApiError
         isError={apiError}
         onClose={closePopup}

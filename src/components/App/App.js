@@ -35,7 +35,6 @@ function App() {
     return mainApi
       .register(data)
       .then((servdata) => {
-        console.log("regData", servdata);
         handleLogin(data);
       })
       .catch((err) => {
@@ -47,7 +46,6 @@ function App() {
     return mainApi
       .authorize(data)
       .then((servdata) => {
-        console.log("logData", servdata);
         setLogErrorMessage("");
         localStorage.setItem("userId", servdata._id);
         setCurrentUser({ name: servdata.name, email: servdata.email });
@@ -63,7 +61,6 @@ function App() {
     return mainApiAuth
       .updateUserInfo(data.name, data.email)
       .then((servdata) => {
-        console.log("updateUserData", servdata);
         setCurrentUser({ name: servdata.name, email: servdata.email });
         setEditSuccessMessage(true);
       })
@@ -78,7 +75,6 @@ function App() {
       .then(() => {
         setIsLoggedIn(false);
         localStorage.clear();
-        console.log("Выход");
         navigate("/");
       })
       .catch((err) => {
@@ -89,7 +85,6 @@ function App() {
     return savedMovies.find((m) => m.movieId === movieId);
   }
   function handleSaveMovie(film) {
-    console.log(film);
     mainApiAuth
       .saveNewMovie(film)
       .then((newCard) => {
@@ -103,7 +98,6 @@ function App() {
 
   // обработчик удаления фильма из избранного
   function handleDeleteMovie(film) {
-    console.log(film);
     mainApiAuth
       .deleteMovie(getMovieById(film.movieId)._id)
       .then(() => {
@@ -125,7 +119,6 @@ function App() {
     mainApiAuth
       .getUserInfo()
       .then((userData) => {
-        // debugger;
         setIsLoggedIn(true);
         setCurrentUser({ name: userData.name, email: userData.email });
       })
@@ -149,9 +142,7 @@ function App() {
         });
     }
   }, [isLoggedIn]);
-  // useEffect(() => setIsLoggedIn(!!localStorage.getItem("userId")), []);
 
-  // console.log(selList);
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
