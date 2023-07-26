@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import picAboutMe from "../../images/pic__aboutMe.png";
 function AboutMe() {
   return (
-    <section className="aboutMe">
+    <section className="aboutMe-box">
+      <div className="aboutMe">
       <Title name={"Студент"} />
       <div className="aboutMe-container">
         <div className="aboutMe-text-container">
@@ -32,7 +33,10 @@ function AboutMe() {
           alt="Мой портрет"
         />
       </div>
+    </div>
+
     </section>
+
   );
 }
 export default AboutMe;

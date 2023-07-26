@@ -1,12 +1,16 @@
+.promo-box {
+  background-color: #073042;
+}
+
 .promo {
   background-color: #073042;
   /* background-color: #60b973; */
-
   text-align: center;
   /* font-size: xx-large; */
   font-family: Inter;
   font-weight: 500;
   max-width: 1280px;
+  margin: 0 auto;
   padding: 0px 70px 75px;
 }
 .promo__text-container {

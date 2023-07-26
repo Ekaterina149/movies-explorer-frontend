@@ -1,9 +1,16 @@
+.portfolio-box {
+  background-color: #202020;
+}
+
 .portfolio {
   padding: 0px 70px 125px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: #202020;
 }
 
 .portfolio__title {

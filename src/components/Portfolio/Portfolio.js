@@ -3,7 +3,8 @@ import "./Portfolio.css";
 import { Link } from "react-router-dom";
 function Portfolio({ links }) {
   return (
-    <section className="portfolio">
+    <section className="portfolio-box">
+    <div className="portfolio">
       <h3 className="portfolio__title">{"Портфолио"}</h3>
       <ul className="portfolio-list">
         {links.map((link, index) => (
@@ -19,6 +20,7 @@ function Portfolio({ links }) {
           </li>
         ))}
       </ul>
+    </div>
     </section>
   );
 }

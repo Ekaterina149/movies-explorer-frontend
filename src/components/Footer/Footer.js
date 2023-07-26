@@ -3,7 +3,8 @@ import "./Footer.css";
 import { Link } from "react-router-dom";
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer-box">
+      <section className="footer">
       <h3 className="footer__title">
         {"Учебный проект Яндекс.Практикум х BeatFilm."}
       </h3>
@@ -28,7 +29,9 @@ function Footer() {
           </Link>
         </div>
       </div>
+    </section>
     </footer>
+
   );
 }
 export default Footer;

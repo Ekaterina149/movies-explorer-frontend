@@ -6,7 +6,8 @@ import promologo from "../../images/promo__logo.svg";
 function Header({ isLoggedIn }) {
   const { pathname } = useLocation();
   return (
-    <header
+    <header className={`"header-box" ${pathname === "/" ? "header-box_theme_main": ""}`}>
+    <section
       className={`header-container ${
         pathname === "/" ? "header-container_theme_main" : ""
       }`}
@@ -19,6 +20,7 @@ function Header({ isLoggedIn }) {
         />
       </Link>
       <Navigation isLoggedIn={isLoggedIn} />
+    </section>
     </header>
   );
 }

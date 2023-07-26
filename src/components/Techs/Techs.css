@@ -1,6 +1,16 @@
+.techs-container {
+  background-color: #272727;
+
+
+
+}
+
 .techs {
   padding: 100px 70px 100px;
   background-color: #272727;
+  margin: auto;
+  max-width: 1280px;
+
 }
 .techs-text-container {
   display: flex;

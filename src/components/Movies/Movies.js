@@ -10,6 +10,7 @@ import PopupApiError from "../PopupApiError/PopupApiError";
 import SearchForm from "../SearchForm/SearchForm";
 import { MOVIE_BASEURL_PIC } from "../../utils/constants";
 import { filterMovies, filterShortMovies } from "../../utils/utils";
+
 function Movies({
   onSaveMovie,
   onDeleteMovie,
@@ -47,10 +48,6 @@ function Movies({
     localStorage.setItem("checkbox", !shortFilms);
   }
 
-  function handleCheckFilteredMovies(arr) {
-    arr.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
-  }
-
   function handleFilterMovie(movies, search, checkbox) {
     const moviesList = filterMovies(movies, search);
     setFilteredMovies(
@@ -61,7 +58,6 @@ function Movies({
 
   // функция обработчик отправки запроса
   function handleSubmit(keyword) {
-    // debugger;
     setLoading(true);
     setSearch(keyword);
     localStorage.setItem("search", keyword);
@@ -86,7 +82,6 @@ function Movies({
           }));
           setAllFilms(res);
           handleFilterMovie(res, keyword, shortFilms);
-          handleCheckFilteredMovies(res);
         })
         .catch((err) => {
           console.log("film error", err);
@@ -96,7 +91,6 @@ function Movies({
     } else {
       handleFilterMovie(allFilms, keyword, shortFilms);
       setLoading(false);
-      handleCheckFilteredMovies(allFilms);
     }
   }
   // функция закрытия попапа с ошибкой
@@ -106,30 +100,50 @@ function Movies({
 
   useEffect(() => {
     const arr = localStorage.getItemOrDefault("movies", []);
-    if (arr && !search) {
-      setIsNotSearched(false);
+
       setShortFilms(localStorage.getItemOrDefault("checkbox", false));
-      setFilteredMovies(shortFilms === true ? filterShortMovies(arr) : arr);
-      handleCheckFilteredMovies(arr);
-    } else setIsNotSearched(true);
-  }, [shortFilms, search]);
+      const currentFilms = shortFilms === true ? filterShortMovies(arr) : arr;
+      setFilteredMovies(currentFilms);
+
+  }, [shortFilms]);
 
   useEffect(() => {
-    if (search) {
-      if (!allFilms.length) handleSubmit(search);
+    const arr = localStorage.getItemOrDefault("movies", []);
+    const isSameSearch =
+      search && search === localStorage.getItemOrDefault("search", "");
+
+    if (search && isSameSearch && arr.length) {
+      const currentFilms = shortFilms === true ? filterShortMovies(arr) : arr;
+      setFilteredMovies(currentFilms);
+    }
+
+    if (search && !isSameSearch) {
+      setFilteredMovies(filterMovies(allFilms, search, shortFilms));
+    }
+  }, [allFilms, search, shortFilms]);
+
+  useEffect(() => {
+    if (search && filteredMovies.length) {
       setIsNotSearched(false);
-      const arr = filterMovies(allFilms, search, shortFilms);
-      setFilteredMovies(arr);
-      handleCheckFilteredMovies(arr);
-    } else setIsNotSearched(true);
-  }, [search, shortFilms, allFilms]);
+      setIsNothingFound(false);
+    }
+
+    if (search && !filteredMovies.length) {
+      setIsNotSearched(false);
+      setIsNothingFound(true);
+    }
+
+    if (!search) {
+      setIsNotSearched(true);
+      setIsNothingFound(false);
+    }
+  }, [search, filteredMovies]);
 
   return (
     <main className="movie-content">
       <SearchForm
         onSearchFilm={handleSubmit}
         queryMovie={search}
-        // filteredMovies={filteredMovies}
         onCheckboxPos={handleShortFilms}
         shortFilms={shortFilms}
       />

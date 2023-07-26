@@ -3,6 +3,7 @@ import Title from "../Title/Title";
 import React from "react";
 function Techs({techs}) {
   return (
+    <section className="techs-container">
     <section className="techs">
       <Title name="Технологии" />
       <div className="techs-text-container">
@@ -20,6 +21,7 @@ function Techs({techs}) {
           ))}
         </ul>
       </div>
+    </section>
     </section>
   );
 }

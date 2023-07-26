@@ -1,9 +1,16 @@
+.aboutMe-box {
+background-color: #202020;
+}
+
 .aboutMe {
   padding: 110px 70px 101px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: #202020;
 }
 .aboutMe-container {
   display: flex;

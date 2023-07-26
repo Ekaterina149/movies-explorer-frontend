@@ -1,7 +1,4 @@
 import { useState, useCallback } from "react";
-//для валидации применяю ту же библиотеку Joi, что и в миддлваре валидации на
-// стороне бэкенда
-const Joi = require("joi");
 
 export function useFormAndValidation() {
   const [values, setValues] = useState({});
@@ -20,6 +17,17 @@ export function useFormAndValidation() {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
 
+    if (name === "email" && values.email) {
+      if (
+        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu.test(
+          values.email
+        )
+      ) {
+        e.target.setCustomValidity("");
+      } else {
+        e.target.setCustomValidity(message.email);
+      }
+    }
     if (
       e.target.value === "" ||
       (e.target.value.match(/\s/g) !== null &&
@@ -36,21 +44,6 @@ export function useFormAndValidation() {
       }
 
       // e.target.setCustomValidity("");
-    }
-    //для валидации применяю ту же библиотеку Joi, что и в миддлваре валидации на
-    // стороне бэкенда
-    if (name === "email") {
-      const schema = Joi.string()
-        .email({ tlds: { allow: false } })
-        .messages({
-          "string.email": message.email,
-        });
-      const validationResult = schema.validate(values.email);
-      if (validationResult.error) {
-        e.target.setCustomValidity(validationResult.error.message);
-      } else {
-        e.target.setCustomValidity("");
-      }
     }
 
     setErrors({ ...errors, [name]: e.target.validationMessage });
