@@ -7,7 +7,7 @@
 }
 .moovie-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   row-gap: 37px;
   column-gap: 24px;
 }
@@ -28,6 +28,17 @@
   margin-top: 60px;
   border: none;
 }
+
+@media screen and (max-width: 1280px) {
+
+  .moovie-container {
+
+    grid-template-columns: repeat(3, 1fr);
+
+  }
+
+}
+
 @media screen and (max-width: 940px) {
   .moovie-container {
     grid-template-columns: repeat(2, 1fr);

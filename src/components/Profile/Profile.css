@@ -61,7 +61,7 @@
 }
 .profile-container__submit_type_disabled {
   background-color: transparent;
-  outline: 2px solid #fff;
+  border: 2px solid #fff;
   cursor: default;
   pointer-events: none;
   opacity: 0.2;

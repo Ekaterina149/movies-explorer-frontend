@@ -31,6 +31,7 @@ function App() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   function handleRegister(data) {
+    setIsLoaging(true);
     setRegErrorMessage("");
     return mainApi
       .register(data)
@@ -40,9 +41,11 @@ function App() {
       .catch((err) => {
         setRegErrorMessage(err.message);
         console.log("RegerrorMessage", err.message);
-      });
+      })
+      .finally(()=>setIsLoaging(false));
   }
   function handleLogin(data) {
+    setIsLoaging(true);
     return mainApi
       .authorize(data)
       .then((servdata) => {
@@ -55,9 +58,11 @@ function App() {
       .catch((err) => {
         setLogErrorMessage(err.message);
         console.log("LogerrorMessage", logErrorMessage);
-      });
+      })
+      .finally(()=> setIsLoaging(false))
   }
   function handleEditProfile(data) {
+    setIsLoaging(true);
     return mainApiAuth
       .updateUserInfo(data.name, data.email)
       .then((servdata) => {
@@ -67,9 +72,11 @@ function App() {
       .catch((err) => {
         setProfErrorMessage(err.message);
         console.log("UserUpdaterorMessage", err.message);
-      });
+      })
+      .finally(()=>setIsLoaging(false))
   }
   function handleLogOut() {
+    setIsLoaging(true);
     mainApiAuth
       .unauthorize()
       .then(() => {
@@ -79,7 +86,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(()=>setIsLoaging(false))
+
   }
   function getMovieById(movieId) {
     return savedMovies.find((m) => m.movieId === movieId);
@@ -131,6 +140,7 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
+      setIsLoaging(true);
       mainApiAuth
         .getUserMovies()
         .then((movieData) => {
@@ -139,7 +149,8 @@ function App() {
         .catch((error) => {
           console.log(error);
           setIsLoggedIn(false);
-        });
+        })
+        .finally(()=>setIsLoaging(false));
     }
   }, [isLoggedIn]);
 
@@ -170,6 +181,7 @@ function App() {
                 path="/movies"
                 element={
                   <ProtectedRoute
+                    isLoaging={isLoaging}
                     component={Movies}
                     onSaveMovie={handleSaveMovie}
                     onDeleteMovie={handleDeleteMovie}
@@ -184,6 +196,7 @@ function App() {
                 path="/saved-movies"
                 element={
                   <ProtectedRoute
+                    isLoaging={isLoaging}
                     component={SavedMovies}
                     isLoggedIn={isLoggedIn}
                     savedMovies={savedMovies}
@@ -197,6 +210,7 @@ function App() {
                 path="/profile"
                 element={
                   <ProtectedRoute
+                    isLoaging={isLoaging}
                     component={Profile}
                     isLoggedIn={isLoggedIn}
                     buttonText="Сохранить"
@@ -212,22 +226,42 @@ function App() {
               <Route
                 path="/signup"
                 element={
-                  <Register
+                  <ProtectedRoute
+                    isLoaging={isLoaging}
+                    component={Register}
+                    isLoggedIn={!isLoggedIn}
                     onRegister={handleRegister}
                     errorMessage={regErrorMessage}
                     onErrorMessage={setRegErrorMessage}
                   />
                 }
+                // element={
+                //   <Register
+                //     onRegister={handleRegister}
+                //     errorMessage={regErrorMessage}
+                //     onErrorMessage={setRegErrorMessage}
+                //   />
+                // }
               />
               <Route
                 path="/signin"
                 element={
-                  <Login
+                <ProtectedRoute
+                    isLoaging={isLoaging}
+                    component={Login}
+                    isLoggedIn={!isLoggedIn}
                     onLogin={handleLogin}
                     errorMessage={logErrorMessage}
                     onErrorMessage={setLogErrorMessage}
                   />
                 }
+                // element={
+                //   <Login
+                //     onLogin={handleLogin}
+                //     errorMessage={logErrorMessage}
+                //     onErrorMessage={setLogErrorMessage}
+                //   />
+                // }
               />
               <Route path="*" element={<Mistake />} />
             </Routes>
