@@ -1,0 +1,137 @@
+.aboutMe-box {
+background-color: #202020;
+}
+
+.aboutMe {
+  padding: 110px 70px 101px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: #202020;
+}
+.aboutMe-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24%;
+  padding-top: 66px;
+}
+.aboutMe-text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.aboutMe-text-container__title {
+  color: #fff;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+  margin: 0;
+}
+.aboutMe-text-container__subtitle {
+  color: #fff;
+  font-size: 18px;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0;
+  padding-top: 18px;
+}
+
+.aboutMe-text-container__article {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  padding-top: 26px;
+  max-width: 600px;
+}
+
+.aboutMe-text-container__gitHub-link {
+  color: #fff;
+  font-size: 14px;
+  font-family: Inter;
+  font-weight: 500;
+  text-decoration: none;
+  padding-top: 99px;
+}
+.aboutMe-text-container__gitHub-link:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+.aboutMe-text-container__image {
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 900px) {
+  .aboutMe {
+    padding: 90px 50px 91px;
+  }
+  .aboutMe-container {
+    gap: 7.5%;
+  }
+  .aboutMe-text-container__title {
+    color: #fff;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+  }
+  .aboutMe-text-container__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 16px;
+  }
+  .aboutMe-text-container__article {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 20px;
+    max-width: 364px;
+  }
+  .aboutMe-text-container__gitHub-link {
+    padding-top: 87px;
+  }
+  .aboutMe-text-container__image {
+    width: 255px;
+    height: 307px;
+  }
+}
+@media screen and (max-width: 570px) {
+  .aboutMe {
+    padding: 70px 14px 70px;
+  }
+  .aboutMe-container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 40px;
+    padding-top: 60px;
+  }
+  .aboutMe-text-container__title {
+    font-size: 30px;
+    letter-spacing: -1.2px;
+  }
+  .aboutMe-text-container__subtitle {
+    font-size: 11px;
+    line-height: 16px;
+    padding-top: 20px;
+  }
+  .aboutMe-text-container__article {
+    font-size: 11px;
+    font-family: Inter;
+    line-height: 16px;
+    padding-top: 20px;
+  }
+
+  .aboutMe-text-container__gitHub-link {
+    padding-top: 40px;
+  }
+  .aboutMe-text-container__image {
+    width: 292px;
+    height: 352px;
+  }
+}

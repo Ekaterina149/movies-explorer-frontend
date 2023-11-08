@@ -1,0 +1,15 @@
+.header_Movie {
+  color: rgba(236, 249, 3, 0.948);
+  text-align: center;
+  font-size: xx-large;
+  font-weight: 500;
+}
+
+.movie-content {
+  /* контент, если надо, расти */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}

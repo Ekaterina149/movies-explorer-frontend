@@ -1,0 +1,79 @@
+.moovie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 80px 70px 80px;
+}
+.moovie-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 37px;
+  column-gap: 24px;
+}
+
+.moovie__button {
+  width: 320px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: #2f2f2f;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 60px;
+  border: none;
+}
+
+@media screen and (max-width: 1280px) {
+
+  .moovie-container {
+
+    grid-template-columns: repeat(3, 1fr);
+
+  }
+
+}
+
+@media screen and (max-width: 940px) {
+  .moovie-container {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 30px;
+    column-gap: 30px;
+  }
+
+  .moovie {
+    padding: 80px 80px 80px;
+  }
+
+  .moovie__button {
+    margin-top: 80px;
+  }
+}
+@media screen and (max-width: 768px) {
+.moovie {
+  padding: 80px 30px 80px;
+}
+}
+
+
+
+@media screen and (max-width: 620px) {
+  .moovie-container {
+    grid-template-columns: 1fr;
+    row-gap: 14px;
+  }
+
+  .moovie {
+    padding: 50px 10px 80px;
+  }
+  .moovie__button {
+    margin-top: 76px;
+    width: 240px;
+    height: 36px;
+  }
+}

@@ -1,0 +1,6 @@
+@import url(./vendor/normalize.css);
+
+#root {
+  background: #202020;
+  margin: 0 auto;
+}
